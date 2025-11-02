@@ -6,8 +6,8 @@
   environment.systemPackages = with pkgs; [
     obsidian
     google-chrome
-    wezterm
     git
+    wezterm
     neovim
     home-manager
     tmux
@@ -17,6 +17,7 @@
     eza
     zsh
     aerospace
+    gnupg
   ];
   users.users.janmejay = {
     home = "/Users/janmejay";
