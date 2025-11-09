@@ -1,6 +1,7 @@
 {config, lib, pkgs, ... }: 
 let 
   cfg = config.nixvim;
+  mkRaw = lib.generators.mkLuaInline;
 in
 {
   options.nixvim = {
@@ -18,14 +19,54 @@ in
 	  shiftwidth = 2;
 	};
 	keymaps = [
-	{
-	  action = "<cmd>Telescope live_grep<CR>";
-	  key = "<leader>gg";
-	}
-	{
-	  action = "<cmd>Telescope find_files<CR>";
-	  key = "<leader>ff";
-	}
+          {
+            action = "<cmd>Telescope live_grep<CR>";
+            key = "<leader>fg";
+          }
+          {
+            action = "<cmd>Telescope find_files<CR>";
+            key = "<leader>ff";
+          }
+          {
+            action = "<cmd>Telescope buffers<CR>";
+            key = "<leader>fb";
+          }
+          {
+            action = "<cmd>Telescope help_tags<CR>";
+            key = "<leader>hh";
+          }
+          {
+            action = "<cmd>Telescope oldfiles<CR>";
+            key = "<leader>fr";
+          }
+          {
+            action = "<cmd>Telescope marks<CR>";
+            key = "<leader>M";
+          }
+          {
+            action = "<cmd>Telescope registers<CR>";
+            key = "<leader>R";
+          }
+          {
+            action = "<CMD>LspStop<Enter>";
+            key = "<leader>lx";
+          }
+          {
+            action = "<CMD>LspStart<Enter>";
+            key = "<leader>ls";
+          }
+          {
+            action = "<CMD>LspRestart<Enter>";
+            key = "<leader>lr";
+          }
+          {
+            action = mkRaw "require('telescope.builtin').lsp_definitions";
+            key = "go";
+          }
+          {
+            action = "<CMD>Lspsaga hover_doc<Enter>";
+            key = "K";
+          }
 	];
 	colorschemes.catppuccin.enable = true;
 	plugins = { 
@@ -44,6 +85,22 @@ in
 	      };
 	      nixd.enable = true;
 	    };
+	    keymaps = {
+              silent = true;
+              diagnostic = {
+                "<leader>j" = "goto_next";
+                "<leader>k" = "goto_prev";
+              };
+              lspBuf = {
+                "K" = "hover";
+                "gd" = "definition";
+                "gD" = "declaration";
+                "gt" = "type_definition";
+                "gi" = "implementation";
+                "gr" = "references";
+                "g/" = "code_action";
+              };
+            };
 	  };
 	  cmp = {
 	    enable = true;
@@ -98,6 +155,7 @@ in
 	  oil.enable = true;
 	  luasnip.enable = true;
 	  lualine.enable = true;
+	  ## neotree.enable = true;
 	  telescope = {
 	    enable = true;
 	    extensions = {
@@ -110,9 +168,15 @@ in
 	    mockDevIcons = true;
 	  };
 	};
+        autoCmd = [
+          {
+            event = [ "TextYankPost" ];
+            command = "lua vim.highlight.on_yank()";
+            pattern = "*"; 
+          }
+        ];
       };
-
-    };
+    };  
   };
 }
   
