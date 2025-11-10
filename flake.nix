@@ -48,7 +48,7 @@
         modules = [ cfg-file sops-nix.nixosModules.sops ];
       };
 
-      darwin-cfg = cfg-file: nix-darwin.lib.darwinSystem {
+      darwin-cfg = {cfg-file, user}: nix-darwin.lib.darwinSystem {
         system = darwinSystem;
         modules = [ 
           cfg-file  
@@ -56,20 +56,20 @@
             nix-homebrew = {
               enable = true;
               enableRosetta = true;
-              user = "janmejay";
+              user = user;
             };
           }
         ];
         specialArgs = { inherit inputs; };
       };
 
-      home-mgr-cfg-d = home-manager.lib.homeManagerConfiguration {
+      home-mgr-cfg-d = user : home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsd;
-        extraSpecialArgs = { inherit inputs nixvim; };
+        extraSpecialArgs = { inherit inputs nixvim user; };
         modules = [ 
             ({ ... }: {
-              home.username = "janmejay";
-              home.homeDirectory = "/Users/janmejay";
+              home.username = user;
+              home.homeDirectory = "/Users/${user}";
             })
             ./home-manager/darwin.nix 
             nixvim.homeModules.nixvim
@@ -86,7 +86,8 @@
       };
 
       darwinConfigurations = {
-        jpl = darwin-cfg ./darwin/jpl.nix;
+        jpl = darwin-cfg {cfg-file = ./darwin/jpl.nix; user = "janmejay"; };
+        js1 = darwin-cfg {cfg-file = ./darwin/js1.nix; user = "janmejay.singh"; };
       };	
 
       # Available through 'home-manager --flake .#janmejay@jnix'
@@ -95,7 +96,8 @@
         "janmejay@lenovo" = home-mgr-cfg-l;
         "janmejay@dell" = home-mgr-cfg-l;
         "janmejay@obsl" = home-mgr-cfg-l;
-        "janmejay@jpl" = home-mgr-cfg-d;
+        "janmejay@jpl" = home-mgr-cfg-d "janmejay";
+        "janmejay@js1" = home-mgr-cfg-d "janmejay.singh";
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;
