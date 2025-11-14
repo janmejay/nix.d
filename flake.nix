@@ -48,10 +48,10 @@
         modules = [ cfg-file sops-nix.nixosModules.sops ];
       };
 
-      darwin-cfg = {cfg-file, user}: nix-darwin.lib.darwinSystem {
+      darwin-cfg = {user, host}: nix-darwin.lib.darwinSystem {
         system = darwinSystem;
         modules = [ 
-          cfg-file  
+          ./darwin/base.nix
           nix-homebrew.darwinModules.nix-homebrew {
             nix-homebrew = {
               enable = true;
@@ -60,7 +60,7 @@
             };
           }
         ];
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit user host inputs; };
       };
 
       home-mgr-cfg-d = user : home-manager.lib.homeManagerConfiguration {
@@ -86,8 +86,8 @@
       };
 
       darwinConfigurations = {
-        jpl = darwin-cfg {cfg-file = ./darwin/jpl.nix; user = "janmejay"; };
-        js1 = darwin-cfg {cfg-file = ./darwin/js1.nix; user = "janmejay.singh"; };
+        jpl = darwin-cfg { user = "janmejay"; host = "jpl"; };
+        js1 = darwin-cfg { user = "janmejay.singh"; host = "LCY79567W2"; };
       };	
 
       # Available through 'home-manager --flake .#janmejay@jnix'

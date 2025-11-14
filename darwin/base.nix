@@ -1,8 +1,8 @@
-{ pkgs, ... }:
+{ pkgs, user, host, ... }:
 {
   nixpkgs.config.allowUnfree = true;
-  networking.computerName = "LCY79567W2";
-  networking.hostName = "LCY79567W2";
+  networking.computerName = host;
+  networking.hostName = host;
   environment.systemPackages = with pkgs; [
     obsidian
     google-chrome
@@ -19,8 +19,8 @@
     aerospace
     gnupg
   ];
-  users.users."janmejay.singh" = {
-    home = "/Users/janmejay.singh";
+  users.users."${user}" = {
+    home = "/Users/${user}";
     shell = pkgs.zsh;
   };
   homebrew = {
@@ -44,7 +44,7 @@
   };
   system = {
     stateVersion = 6;
-    primaryUser = "janmejay.singh";
+    primaryUser = user;
     defaults = {
       dock.autohide = true;
       finder.AppleShowAllFiles = true;

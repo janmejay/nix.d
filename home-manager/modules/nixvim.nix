@@ -19,6 +19,10 @@ in
 	  shiftwidth = 2;
 	};
 	keymaps = [
+	  {
+	    action = "<C-w>";
+	    key = "<C-t>";
+	  }
           {
             action = "<cmd>Telescope live_grep<CR>";
             key = "<leader>fg";
