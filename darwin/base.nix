@@ -30,6 +30,7 @@
     	"karabiner-elements"
 	"intellij-idea-ce"
 	"shortcat"
+	"copyq"
 	#"scoot"
 	#"mouseless"
 	#"homerow"
@@ -50,5 +51,10 @@
       finder.AppleShowAllFiles = true;
       loginwindow.GuestEnabled = false;
     };
+  };
+  services.activate-user.defaults.NSGlobalDomain = {
+    InitialKeyRepeat = 10;
+    KeyRepeat = 1;
+    ApplePressAndHoldEnabled = false; 
   };
 }

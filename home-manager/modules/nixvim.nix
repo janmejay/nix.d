@@ -17,6 +17,7 @@ in
 	  relativenumber = true;
 	  number = true;
 	  shiftwidth = 2;
+	  clipboard = "unnamedplus";
 	};
 	keymaps = [
 	  {
@@ -33,7 +34,7 @@ in
           }
           {
             action = "<cmd>Telescope buffers<CR>";
-            key = "<leader>fb";
+            key = "<leader> ";
           }
           {
             action = "<cmd>Telescope help_tags<CR>";
