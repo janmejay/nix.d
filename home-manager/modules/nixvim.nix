@@ -24,6 +24,10 @@ in
 	    action = "<C-w>";
 	    key = "<C-t>";
 	  }
+	  {
+	    action = "<cmd>Neotree filesystem reveal toggle<CR>";
+	    key = "\\";
+	  }
           {
             action = "<cmd>Telescope live_grep<CR>";
             key = "<leader>fg";
@@ -160,7 +164,8 @@ in
 	  oil.enable = true;
 	  luasnip.enable = true;
 	  lualine.enable = true;
-	  ## neotree.enable = true;
+	  neo-tree.enable = true;
+	  web-devicons.enable = true;
 	  telescope = {
 	    enable = true;
 	    extensions = {
