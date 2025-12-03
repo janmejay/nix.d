@@ -48,7 +48,7 @@
         modules = [ cfg-file sops-nix.nixosModules.sops ];
       };
 
-      darwin-cfg = {user, host}: nix-darwin.lib.darwinSystem {
+      darwin-cfg = {user, host, addons}: nix-darwin.lib.darwinSystem {
         system = darwinSystem;
         modules = [ 
           ./darwin/base.nix
@@ -59,11 +59,11 @@
               user = user;
             };
           }
-        ];
+        ] ++ addons;
         specialArgs = { inherit user host inputs; };
       };
 
-      home-mgr-cfg-d = user : home-manager.lib.homeManagerConfiguration {
+      home-mgr-cfg-d = {user, addons} : home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsd;
         extraSpecialArgs = { inherit inputs nixvim user; };
         modules = [ 
@@ -73,7 +73,7 @@
             })
             ./home-manager/darwin.nix 
             nixvim.homeModules.nixvim
-        ];
+        ] ++ addons;
       };
     in {
 
@@ -86,8 +86,8 @@
       };
 
       darwinConfigurations = {
-        jpl = darwin-cfg { user = "janmejay"; host = "jpl"; };
-        js1 = darwin-cfg { user = "janmejay.singh"; host = "LCY79567W2"; };
+        jpl = darwin-cfg { user = "janmejay"; host = "jpl"; addons = []; };
+        js1 = darwin-cfg { user = "janmejay.singh"; host = "LCY79567W2"; addons = [./darwin/zscalar.nix];};
       };	
 
       # Available through 'home-manager --flake .#janmejay@jnix'
@@ -96,8 +96,8 @@
         "janmejay@lenovo" = home-mgr-cfg-l;
         "janmejay@dell" = home-mgr-cfg-l;
         "janmejay@obsl" = home-mgr-cfg-l;
-        "janmejay@jpl" = home-mgr-cfg-d "janmejay";
-        "janmejay@js1" = home-mgr-cfg-d "janmejay.singh";
+        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; addons = []; };
+        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; addons = [./home-manager/addons/zscalar.nix]; }; 
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;
