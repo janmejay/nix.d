@@ -91,7 +91,7 @@ automatically-unhide-macos-hidden-apps = false
     # end tell'
     # '''
     cmd-ctrl-b = 'exec-and-forget /Applications/CopyQ.app/Contents/MacOS/CopyQ show'
-    cmd-shift-enter = 'exec-and-forget open -n -a /run/current-system/sw/bin/wezterm --args -e /run/current-system/sw/bin/tmux'
+    cmd-shift-enter = "exec-and-forget /bin/zsh -l -c 'open -n -a /run/current-system/sw/bin/wezterm --args -e /run/current-system/sw/bin/tmux'"
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-space = 'layout tiles horizontal vertical'
