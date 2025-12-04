@@ -48,7 +48,7 @@ $ nixos-rebuild list-generations
   * (same home-mgr cmd)
 
 
-# Work with zscalar
+# Work with zscalar (src: https://tbawor.sh/posts/nix-on-macos/)
 * security export -t certs -f pemseq -k /Library/Keychains/System.keychain -o /tmp/certs-system.pem
 * security export -t certs -f pemseq -k /System/Library/Keychains/SystemRootCertificates.keychain -o /tmp/certs-root.pem
 * cat /tmp/certs-root.pem /tmp/certs-system.pem > /tmp/ca_cert.pem
