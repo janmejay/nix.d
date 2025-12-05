@@ -152,7 +152,7 @@ automatically-unhide-macos-hidden-apps = false
   6 = [1, 2, 'main']
   7 = [1, 2, 'main']
   8 = [1, 2, 'main']
-  9 = [1, 2, 'main']
+  9 = ['main']
 
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
