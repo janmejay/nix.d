@@ -51,8 +51,8 @@
       finder.AppleShowAllFiles = true;
       loginwindow.GuestEnabled = false;
       NSGlobalDomain = {
-        InitialKeyRepeat = 10;
-        KeyRepeat = 1;
+        InitialKeyRepeat = 14;
+        KeyRepeat = 2;
         ApplePressAndHoldEnabled = false;
       };
     };
