@@ -2,7 +2,7 @@
 let 
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
-    rev = "f9ae57589605dfde400387eafe1e464ff269c35a";
+    rev = "1f642e40168941ab5cfd408d526adcbb4c85a4ce";
     submodules = true;
     ref = "master";
   };
