@@ -18,4 +18,5 @@ return {
   enable_tab_bar = false,
   window_decorations = 'RESIZE',
   font_size = 13,
+  audible_bell = "Disabled",
 }

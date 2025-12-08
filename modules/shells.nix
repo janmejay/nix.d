@@ -85,17 +85,11 @@ in {
             lua54Packages.lua
             sqlite
             google-cloud-sdk
+            ssm-session-manager-plugin
           ];
           shellHook = ''
-            export KUBECONFIG=/home/janmejay/.kube/config
-            dp_bin=$(pwd)/dataplane
-            if [ -e $dp_bin ]; then
-              echo "Found dataplane bin, adding to path"
-              export PATH=$PATH:$(dirname $dp_bin)
-            else
-              echo "Found NO dataplane bin ($dp_bin)"
-            fi
-            exec /home/janmejay/.nix-profile/bin/zsh
+            export KUBECONFIG=$HOME/.kube/config
+            exec $HOME/.nix-profile/bin/zsh
           '';
           buildInputs = [
             p.sbt

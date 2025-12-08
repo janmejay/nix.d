@@ -20,6 +20,9 @@ in
           list = true;
           listchars = "tab:»\\ ,trail:·,nbsp:␣";
           clipboard = "unnamedplus";
+          expandtab = true;
+          tabstop = 2;
+          softtabstop = 2;
         };
         keymaps = [
           {
