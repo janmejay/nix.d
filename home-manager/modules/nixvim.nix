@@ -13,6 +13,8 @@ in
       config = {
         enable = true;
         globals.mapleader = " ";
+        extraConfigLua = ''
+        '';
         opts = {
           relativenumber = true;
           number = true;
@@ -23,6 +25,9 @@ in
           expandtab = true;
           tabstop = 2;
           softtabstop = 2;
+          cursorline = true;
+          scrolloff = 16;
+          signcolumn = "yes";
         };
         keymaps = [
           {
@@ -78,6 +83,10 @@ in
             key = "gt";
           }
           {
+            action = mkRaw "require('actions-preview').code_actions";
+            key = "g/";
+          }
+          {
             action = "<CMD>LspStop<Enter>";
             key = "<leader>lx";
           }
@@ -97,12 +106,56 @@ in
             action = "<CMD>Lspsaga hover_doc<Enter>";
             key = "K";
           }
+          {
+            key = "<leader>/";
+            action = mkRaw ''
+              function()
+                require('telescope.builtin').current_buffer_fuzzy_find(
+                  require('telescope.themes').get_dropdown {
+                    winblend = 10,
+                    previewer = false,
+                  }
+                )
+              end
+            '';
+          }
         ];
-        colorschemes.catppuccin.enable = true;
-        plugins = {
-          treesitter = {
-            enable = true;
+        colorschemes.catppuccin = {
+          enable = true;
+          settings = {
+            custom_highlights = {
+              DiagnosticUnderlineError = {
+                fg = "#FF0000";
+                sp = "#FF0000";
+                undercurl = true;
+                underline = false;
+                bold = true;
+              };
+              DiagnosticUnderlineWarn = {
+                fg = "#FFA500";
+                sp = "#FFA500";
+                undercurl = true;
+                underline = false;
+                bold = true;
+              };
+              DiagnosticUnderlineInfo = {
+                sp = "#89b4fa";
+                undercurl = true;
+                underline = false;
+              };
+              DiagnosticUnderlineHint = {
+                sp = "#94e2d5";
+                undercurl = true;
+                underline = false;
+              };
+              CursorLine = { bg = "#313244"; };
+              CursorLineNr = { fg = "#fab387"; bold = true; };
+            };
           };
+        };
+        plugins = {
+          actions-preview.enable = true;
+          treesitter.enable = true;
           lsp = {
             enable = true;
             servers = {
@@ -112,6 +165,14 @@ in
                 enable = true;
                 installCargo = false;
                 installRustc = false;
+              };
+              protols = {
+                enable = true;
+                extraOptions = {
+                  cmd = [ "protols" "serve" ];
+                  filetypes = [ "proto" ];
+                  root_dir = mkRaw "require('lspconfig.util').root_pattern('.git', '.')";
+                };
               };
               nixd.enable = true;
             };
@@ -124,7 +185,6 @@ in
               lspBuf = {
                 "K" = "hover";
                 "gD" = "declaration";
-                "g/" = "code_action";
               };
             };
           };
@@ -156,6 +216,8 @@ in
                 }
               ];
               mapping = {
+                "<C-n>" = "cmp.mapping.select_next_item()";
+                "<C-p>" = "cmp.mapping.select_prev_item()";
                 "<C-y>" = "cmp.mapping.confirm({ select = true})";
                 "<C-e>" = "cmp.mapping.abort()";
               };
@@ -166,6 +228,7 @@ in
           lualine.enable = true;
           neo-tree.enable = true;
           web-devicons.enable = true;
+          marks.enable = true;
           telescope = {
             enable = true;
             extensions = {

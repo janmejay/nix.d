@@ -19,6 +19,23 @@
     aerospace
     gnupg
   ];
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    cascadia-code
+    dejavu_fonts
+    powerline-fonts
+    ubuntu-sans-mono
+    intel-one-mono
+    source-code-pro
+    noto-fonts
+    noto-fonts-cjk-sans
+    noto-fonts-emoji
+    liberation_ttf
+    fira-code
+    fira-code-symbols
+    mplus-outline-fonts.githubRelease
+    dina-font
+  ];
   users.users."${user}" = {
     home = "/Users/${user}";
     shell = pkgs.zsh;

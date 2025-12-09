@@ -18,5 +18,6 @@ return {
   enable_tab_bar = false,
   window_decorations = 'RESIZE',
   font_size = 13,
+  font = wezterm.font 'JetBrainsMono Nerd Font',
   audible_bell = "Disabled",
 }

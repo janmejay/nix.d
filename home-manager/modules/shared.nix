@@ -2,7 +2,7 @@
 let 
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
-    rev = "1f642e40168941ab5cfd408d526adcbb4c85a4ce";
+    rev = "9954323ebdf9be35c059a129e93f52be0654d029";
     submodules = true;
     ref = "master";
   };
@@ -28,8 +28,6 @@ in
     c = "bat";
   };
 
-  fonts.fontconfig.enable = true;
-
   home.file = {
     ".config" = {
       source = ../../dots/dot_config;
@@ -50,20 +48,6 @@ in
     silver-searcher
     jq
     ripgrep
-    cascadia-code
-    dejavu_fonts
-    powerline-fonts
-    ubuntu-sans-mono
-    intel-one-mono
-    source-code-pro
-    noto-fonts
-    noto-fonts-cjk-sans
-    noto-fonts-emoji
-    liberation_ttf
-    fira-code
-    fira-code-symbols
-    mplus-outline-fonts.githubRelease
-    dina-font
     tree
     fd
     yazi
