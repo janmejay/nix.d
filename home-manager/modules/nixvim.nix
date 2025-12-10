@@ -166,14 +166,7 @@ in
                 installCargo = false;
                 installRustc = false;
               };
-              protols = {
-                enable = true;
-                extraOptions = {
-                  cmd = [ "protols" "serve" ];
-                  filetypes = [ "proto" ];
-                  root_dir = mkRaw "require('lspconfig.util').root_pattern('.git', '.')";
-                };
-              };
+              protols.enable = true;
               nixd.enable = true;
             };
             keymaps = {
