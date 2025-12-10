@@ -1,7 +1,15 @@
 {config, lib, pkgs, ... }: 
 let 
-cfg = config.nixvim;
-mkRaw = lib.generators.mkLuaInline;
+  cfg = config.nixvim;
+  mkRaw = lib.generators.mkLuaInline;
+  telescope_picker_config = {
+    symbol_width = 94;
+    symbol_type_width = 10;
+    layout_config = {
+      width = 0.95;
+      preview_width = 0.5;
+    };
+  };
 in
 {
   options.nixvim = {
@@ -101,6 +109,10 @@ in
           {
             action = mkRaw "require('telescope.builtin').lsp_document_symbols";
             key = "go";
+          }
+          {
+            action = mkRaw "require('telescope.builtin').lsp_dynamic_workspace_symbols";
+            key = "gO";
           }
           {
             action = "<CMD>Lspsaga hover_doc<Enter>";
@@ -229,6 +241,8 @@ in
             };
             settings = {
               pickers = {
+                lsp_document_symbols = telescope_picker_config;
+                lsp_dynamic_workspace_symbols = telescope_picker_config;
                 find_files = {
                   follow = true;
                   hidden = true;
