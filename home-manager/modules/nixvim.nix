@@ -107,7 +107,7 @@ in
             key = "K";
           }
           {
-            key = "<leader>/";
+            key = "f/";
             action = mkRaw ''
               function()
                 require('telescope.builtin').current_buffer_fuzzy_find(
