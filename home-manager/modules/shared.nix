@@ -51,6 +51,7 @@ in
     tree
     fd
     yazi
+    watch
   ];
 
   programs.zsh = {

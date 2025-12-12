@@ -40,7 +40,7 @@ in
         keymaps = [
           {
             action = "<C-w>";
-            key = "<C-t>";
+            key = "<C-j>";
           }
           {
             action = "<cmd>Neotree filesystem reveal toggle<CR>";
@@ -95,6 +95,14 @@ in
             key = "g/";
           }
           {
+            key = "<leader>fw";
+            action = mkRaw ''
+              function()
+                require('telescope.builtin').grep_string({ word_match = "-w" })
+              end
+            '';
+          }
+          {
             action = "<CMD>LspStop<Enter>";
             key = "<leader>lx";
           }
@@ -119,7 +127,7 @@ in
             key = "K";
           }
           {
-            key = "f/";
+            key = "<leader>s";
             action = mkRaw ''
               function()
                 require('telescope.builtin').current_buffer_fuzzy_find(
@@ -190,6 +198,7 @@ in
               lspBuf = {
                 "K" = "hover";
                 "gD" = "declaration";
+                "gn" = "rename";
               };
             };
           };
@@ -250,6 +259,14 @@ in
                 live_grep = {
                   follow = true;
                   additional_args = [ "--hidden" ];
+                };
+                registers = {
+                  theme = "dropdown";
+                  previewer = true;
+                  layout_config = {
+                    width = 0.8;
+                    height = 0.8;
+                  };
                 };
               };
             };
