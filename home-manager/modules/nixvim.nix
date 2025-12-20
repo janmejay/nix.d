@@ -174,6 +174,11 @@ in
           };
         };
         plugins = {
+          copilot-lua = {
+            enable = true;
+            settings.panel.enabled = false;
+          };
+          copilot-chat.enable = true;
           actions-preview.enable = true;
           treesitter.enable = true;
           lsp = {
