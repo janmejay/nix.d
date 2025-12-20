@@ -1,5 +1,5 @@
 {config, lib, pkgs, ... }: 
-let 
+let
   cfg = config.nixvim;
   mkRaw = lib.generators.mkLuaInline;
   telescope_picker_config = {
@@ -10,8 +10,14 @@ let
       preview_width = 0.5;
     };
   };
-in
-{
+  telescope_dropdown_config = {
+    winblend = 10;
+    layout_config = {
+      width = 0.95;
+      height = 0.4;
+    };
+  };
+in{
   options.nixvim = {
     enable = lib.mkEnableOption "Setup nixvim";
   };
@@ -131,10 +137,9 @@ in
             action = mkRaw ''
               function()
                 require('telescope.builtin').current_buffer_fuzzy_find(
-                  require('telescope.themes').get_dropdown {
-                    winblend = 10,
-                    previewer = false,
-                  }
+                  require('telescope.themes').get_dropdown(
+                    ${lib.generators.toLua {} telescope_dropdown_config}
+                  )
                 )
               end
             '';
