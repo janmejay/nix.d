@@ -174,6 +174,14 @@ in
           };
         };
         plugins = {
+          orgmode = {
+            enable = true;
+            settings = {
+              org_agenda_files = "~/projects/agenda.org/**/*";
+              org_default_notes_file = "~/Documents/notes.org";
+            };
+          };
+          nvim-surround.enable = true;
           copilot-lua = {
             enable = true;
             settings.panel.enabled = false;
