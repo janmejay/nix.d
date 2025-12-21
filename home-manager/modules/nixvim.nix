@@ -175,6 +175,7 @@ in{
               };
               CursorLine = { bg = "#313244"; };
               CursorLineNr = { fg = "#fab387"; bold = true; };
+              CmpBorder = { fg = "#ffffff";};
             };
           };
         };
@@ -225,6 +226,14 @@ in{
             autoEnableSources = true;
 
             settings = {
+              window = {
+                completion = {
+                  border = "rounded";
+                };
+                documentation = {
+                  border = "rounded";
+                };
+              };
               sources = [
                 {
                   name = "nvim_lsp";
