@@ -63,9 +63,9 @@
         specialArgs = { inherit user host inputs; };
       };
 
-      home-mgr-cfg-d = {user, addons} : home-manager.lib.homeManagerConfiguration {
+      home-mgr-cfg-d = {user, addons, ai ? "copilot"} : home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsd;
-        extraSpecialArgs = { inherit inputs nixvim user; };
+        extraSpecialArgs = { inherit inputs nixvim user ai; };
         modules = [ 
             ({ ... }: {
               home.username = user;
@@ -96,8 +96,8 @@
         "janmejay@lenovo" = home-mgr-cfg-l;
         "janmejay@dell" = home-mgr-cfg-l;
         "janmejay@obsl" = home-mgr-cfg-l;
-        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; addons = []; };
-        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; addons = [./home-manager/addons/zscalar.nix]; }; 
+        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; ai_assistant = "copilot"; addons = []; };
+        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; ai_assistant = "codeium"; addons = [./home-manager/addons/zscalar.nix]; };
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;

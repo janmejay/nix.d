@@ -1,4 +1,4 @@
-{config, lib, pkgs, ... }: 
+{config, lib, pkgs, ai_assistant, ... }: 
 let
   cfg = config.nixvim;
   mkRaw = lib.generators.mkLuaInline;
@@ -17,9 +17,19 @@ let
       height = 0.4;
     };
   };
+  aiCmpSource = (
+    if ai_assistant == "copilot" then [{ name = "copilot"; priority = 400; }]
+    else if ai_assistant == "codeium" then [{ name = "codeium"; priority = 400; }]
+    else []
+  );
 in{
   options.nixvim = {
     enable = lib.mkEnableOption "Setup nixvim";
+    ai_assistant = lib.mkOption {
+      type = lib.types.enum [ "copilot" "codeium" ];
+      default = "copilot";
+      description = "The AI assistant to use in nixvim.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
@@ -192,11 +202,6 @@ in{
             };
           };
           nvim-surround.enable = true;
-          copilot-lua = {
-            enable = true;
-            settings.panel.enabled = false;
-          };
-          copilot-chat.enable = true;
           actions-preview.enable = true;
           treesitter.enable = true;
           lsp = {
@@ -255,11 +260,7 @@ in{
                   name = "buffer";
                   priority = 500;
                 }
-                {
-                  name = "copilot";
-                  priority = 400;
-                }
-              ];
+              ] ++ aiCmpSource; # Append AI assistant source here
               mapping = {
                 "<C-n>" = "cmp.mapping.select_next_item()";
                 "<C-p>" = "cmp.mapping.select_prev_item()";
@@ -317,7 +318,12 @@ in{
             modules.icons = { };
             mockDevIcons = true;
           };
-        };
+        } // (if ai_assistant == "copilot" then {
+          copilot-lua = { enable = true; settings.panel.enabled = false; };
+          copilot-chat.enable = true;
+        } else if ai_assistant == "codeium" then {
+          codeium-vim.enable = true;
+        } else {}) ;
         autoCmd = [
           {
             event = [ "TextYankPost" ];
