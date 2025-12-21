@@ -40,8 +40,11 @@ in{
           tabstop = 2;
           softtabstop = 2;
           cursorline = true;
-          scrolloff = 16;
+          scrolloff = 999;
           signcolumn = "yes";
+          foldenable = true;
+          foldmethod = "indent";
+          foldlevelstart = 99;
         };
         keymaps = [
           {
@@ -175,6 +178,7 @@ in{
               };
               CursorLine = { bg = "#313244"; };
               CursorLineNr = { fg = "#fab387"; bold = true; };
+              LineNr = { fg = "#dddddd"; };
               CmpBorder = { fg = "#ffffff";};
             };
           };
