@@ -1,4 +1,4 @@
-{config, lib, pkgs, ai_assistant, ... }: 
+{config, lib, pkgs, ai, ... }:
 let
   cfg = config.nixvim;
   mkRaw = lib.generators.mkLuaInline;
@@ -18,14 +18,14 @@ let
     };
   };
   aiCmpSource = (
-    if ai_assistant == "copilot" then [{ name = "copilot"; priority = 400; }]
-    else if ai_assistant == "codeium" then [{ name = "codeium"; priority = 400; }]
+    if ai == "copilot" then [{ name = "copilot"; priority = 400; }]
+    else if ai == "codeium" then [{ name = "codeium"; priority = 400; }]
     else []
   );
 in{
   options.nixvim = {
     enable = lib.mkEnableOption "Setup nixvim";
-    ai_assistant = lib.mkOption {
+    ai = lib.mkOption {
       type = lib.types.enum [ "copilot" "codeium" ];
       default = "copilot";
       description = "The AI assistant to use in nixvim.";
@@ -188,7 +188,7 @@ in{
               };
               CursorLine = { bg = "#313244"; };
               CursorLineNr = { fg = "#fab387"; bold = true; };
-              LineNr = { fg = "#dddddd"; };
+              LineNr = { fg = "#bbbbbb"; };
               CmpBorder = { fg = "#ffffff";};
             };
           };
@@ -318,11 +318,11 @@ in{
             modules.icons = { };
             mockDevIcons = true;
           };
-        } // (if ai_assistant == "copilot" then {
+        } // (if ai == "copilot" then {
           copilot-lua = { enable = true; settings.panel.enabled = false; };
           copilot-chat.enable = true;
-        } else if ai_assistant == "codeium" then {
-          codeium-vim.enable = true;
+        } else if ai == "codeium" then {
+          windsurf-vim.enable = true;
         } else {}) ;
         autoCmd = [
           {

@@ -96,8 +96,8 @@
         "janmejay@lenovo" = home-mgr-cfg-l;
         "janmejay@dell" = home-mgr-cfg-l;
         "janmejay@obsl" = home-mgr-cfg-l;
-        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; ai_assistant = "copilot"; addons = []; };
-        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; ai_assistant = "codeium"; addons = [./home-manager/addons/zscalar.nix]; };
+        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; ai = "copilot"; addons = []; };
+        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; ai = "copilot"; addons = [./home-manager/addons/zscalar.nix]; };
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;
