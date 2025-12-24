@@ -1,25 +1,13 @@
-hint_activation_key: C-A-g
-activation_key: C-A-f
+hint_activation_key: C-M-g
+activation_key: C-M-f
 hint_size: 14
-hint_bgcolor: #f3e260
+hint_bgcolor: #b58900
 hint_fgcolor: #000000
-left: C-b Left
-down: C-n Down
-up: C-p Up
-right: C-f Right
-scroll_down: j
-scroll_up: k
-start: C-a Home
-end: C-e End
 indicator: topleft
 hint_exit: esc
 exit: esc
-top: A-S-,
-middle: C-l
-bottom: A-S-.
 indicator_color: #f3e260
 indicator_size: 8
-hint: C-A-g g
+hint: C-M-g g
 hint_chars: abcdef;ghijklmnopqrst'uvwx[yz
-drag: C-space
-copy_and_exit: esc A-w
+copy_and_exit: esc y

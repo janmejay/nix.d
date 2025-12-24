@@ -62,8 +62,20 @@ in{
             key = "<C-j>";
           }
           {
-            action = "<cmd>Neotree filesystem reveal toggle<CR>";
-            key = "\\";
+            key = "]q";
+            action = "<cmd>cnext<CR>";
+          }
+          {
+            key = "[q";
+            action = "<cmd>cprev<CR>";
+          }
+          {
+            key = "<leader>tc";
+            action = "<cmd>Neotree close<CR>";
+          }
+          {
+            key = "<leader>to";
+            action = "<cmd>Neotree filesystem reveal focus<CR>";
           }
           {
             action = "<cmd>Telescope live_grep<CR>";

@@ -1,5 +1,6 @@
 { pkgs, user, ... }:
 let 
+  warpd = pkgs.callPackage ../../pkgs/warpd {};
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
     rev = "fd1a74b79111e0a9c2028e357cff5a3d28e45868";
@@ -53,6 +54,7 @@ in
     yazi
     watch
     nodejs_latest
+    warpd
   ];
 
   programs.zsh = {

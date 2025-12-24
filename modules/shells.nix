@@ -26,6 +26,31 @@ in {
           '';
         };
 
+        c = p.mkShell {
+          name = "C dev";
+          packages = with p; [
+            gcc
+            gdb
+            cmake
+            ninja
+            jemalloc
+            openssl
+            lz4
+            clang
+            llvmPackages.bintools
+            rustup
+            openssl
+            lldb
+            gcc
+            gawk
+            python3
+            flex
+          ];
+          shellHook = ''
+            echo C Dev
+          '';
+        };
+
         fdb = p.mkShell {
           name = "FoundationDB";
 
