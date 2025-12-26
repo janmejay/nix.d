@@ -44,13 +44,9 @@
     enable = true;
     onActivation.cleanup = "zap";
     casks = [ 
-    	"karabiner-elements"
-	"intellij-idea-ce"
-	"shortcat"
-	"copyq"
-	#"scoot"
-	#"mouseless"
-	#"homerow"
+      "karabiner-elements"
+      "intellij-idea-ce"
+      "copyq"
     ];
   };
   programs.zsh.enable = true;
