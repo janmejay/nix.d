@@ -120,22 +120,5 @@ in {
             p.sbt
           ];
         };
-
-        work_fhs = (p.buildFHSEnv {
-          name = "work_fhs";
-          targetPkgs = pkgs: (with pkgs; [
-            awscli2
-            kubectl
-            kubectx
-            minikube
-            go_1_25
-            virtualenv
-          ]);
-          multiPkgs = pkgs: (with pkgs; [
-            udev
-            alsa-lib
-          ]);
-          runScript = "zsh";
-        }).env;
-      });
+    });
 }
