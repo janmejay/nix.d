@@ -111,6 +111,7 @@ in {
             sqlite
             google-cloud-sdk
             ssm-session-manager-plugin
+            socat
           ];
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/config
