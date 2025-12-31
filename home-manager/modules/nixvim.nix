@@ -35,6 +35,7 @@ in{
   config = lib.mkIf cfg.enable {
     programs.nixvim = {
       config = {
+        nixpkgs.pkgs = pkgs;
         enable = true;
         globals.mapleader = " ";
         extraConfigLua = ''
