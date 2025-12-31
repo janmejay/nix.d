@@ -1,6 +1,6 @@
 * Nvim
   * Enable windsurf (stuck at non-free license)
   * [DONE] Create keyboard shortcuts for :cnext, :cprev etc
-  * [DONE] Improve neotree toggle
-    * If not in the tree, do not toggle, instead jump to the tree
-    * Alternative: Have a different keystroke for closing the tree
+  * Improve neotree toggle
+  * Create shortcut for copying file relative path to @+
+  * Create shortcut for showing file relative path
