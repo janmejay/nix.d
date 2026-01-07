@@ -71,12 +71,12 @@ in{
             action = "<cmd>cprev<CR>";
           }
           {
-            key = "<leader>tc";
-            action = "<cmd>Neotree close<CR>";
+            key = "gf";
+            action = "<cmd>Neotree filesystem reveal focus<CR>";
           }
           {
-            key = "<leader>to";
-            action = "<cmd>Neotree filesystem reveal focus<CR>";
+            key = "<leader>tt";
+            action = "<cmd>Neotree toggle<CR>";
           }
           {
             action = "<cmd>Telescope live_grep<CR>";
@@ -284,7 +284,16 @@ in{
           };
           oil.enable = true;
           luasnip.enable = true;
-          lualine.enable = true;
+          lualine = {
+            enable = true;
+            settings = {
+              sections = {
+                lualine_b = [ "diff" "diagnostics" ];
+                lualine_c = [{ __unkeyed-1 = "filename"; path = 1; }];
+                lualine_x = [ "encoding" "filetype" ];
+              };
+            };
+          };
           neo-tree.enable = true;
           web-devicons.enable = true;
           marks.enable = true;
