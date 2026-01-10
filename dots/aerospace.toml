@@ -154,6 +154,10 @@ automatically-unhide-macos-hidden-apps = false
   8 = [1, 2, 'main']
   9 = ['main']
 
+[[on-window-detected]]
+    if.app-id = 'io.github.hluk.CopyQ'
+    run = 'layout floating'
+
 # 'service' binding mode declaration.
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
 [mode.service.binding]

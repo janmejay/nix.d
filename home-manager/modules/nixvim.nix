@@ -290,7 +290,17 @@ in{
               sections = {
                 lualine_b = [ "diff" "diagnostics" ];
                 lualine_c = [{ __unkeyed-1 = "filename"; path = 1; }];
-                lualine_x = [ "encoding" "filetype" ];
+                lualine_x = [
+                  {
+                    __unkeyed-1 = mkRaw ''
+                        function()
+                        return " " .. vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+                        end
+                      '';
+                  }
+                  "encoding"
+                  "filetype"
+                ];
               };
             };
           };
