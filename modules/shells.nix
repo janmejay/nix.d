@@ -112,6 +112,9 @@ in {
             google-cloud-sdk
             ssm-session-manager-plugin
             socat
+            colima
+            docker
+            docker-compose
           ];
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/config

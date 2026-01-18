@@ -4,3 +4,4 @@
   * Improve neotree toggle
   * Create shortcut for copying file relative path to @+
   * Create shortcut for showing file relative path
+  * Ensure `cargo` is not availble in base env (to avoid unwanted rebuilds)

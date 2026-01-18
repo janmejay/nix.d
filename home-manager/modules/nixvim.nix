@@ -51,7 +51,6 @@ in{
           tabstop = 2;
           softtabstop = 2;
           cursorline = true;
-          scrolloff = 999;
           signcolumn = "yes";
           foldenable = true;
           foldmethod = "indent";
