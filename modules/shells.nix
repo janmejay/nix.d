@@ -6,6 +6,39 @@ in {
     eachSystem (system: 
      let
        p = nixpkgs.legacyPackages.${system};
+       work_pkgs = with p; [
+            awscli2
+            azure-cli
+            kubectl
+            kubectx
+            minikube
+            go_1_25
+            delve
+            clang
+            k9s
+            kubernetes-helm
+            grpcurl
+            gh
+            yq
+            graphqurl
+            visualvm
+            unzip
+            evcxr
+            rustc
+            gradle
+            openjdk
+            protobuf
+            lua54Packages.lua
+            sqlite
+            google-cloud-sdk
+            ssm-session-manager-plugin
+            socat
+            colima
+            docker
+            docker-compose
+            python312Packages.virtualenv
+            pstree
+          ];
      in {
         amm = p.mkShell {
           packages = [ p.ammonite_2_13 ];
@@ -82,47 +115,28 @@ in {
           ];
         };
 
-        work = p.mkShell {
+        ob = p.mkShell {
           name = "work";
           hardeningDisable = [ "all" ];
-          packages = with p; [
-            awscli2
-            azure-cli
-            kubectl
-            kubectx
-            minikube
-            go_1_25
-            delve
-            clang
-            k9s
-            kubernetes-helm
-            grpcurl
-            gh
-            yq
-            graphqurl
-            visualvm
-            unzip
-            evcxr
-            rustc
-            gradle
-            openjdk
-            protobuf
-            lua54Packages.lua
-            sqlite
-            google-cloud-sdk
-            ssm-session-manager-plugin
-            socat
-            colima
-            docker
-            docker-compose
-          ];
+          packages = work_pkgs;
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/config
             exec $HOME/.nix-profile/bin/zsh
+            OBS_K8S_SOCKS_PROXY=socks5://localhost:5000
           '';
           buildInputs = [
             p.sbt
           ];
+        };
+
+        s1 = p.mkShell {
+          name = "s1";
+          hardeningDisable = [ "all" ];
+          packages = work_pkgs ++ [ p.kubelogin-oidc ];
+          shellHook = ''
+            export KUBECONFIG=$HOME/.kube/eks-config
+            exec $HOME/.nix-profile/bin/zsh
+          '';
         };
     });
 }
