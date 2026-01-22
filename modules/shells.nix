@@ -116,13 +116,13 @@ in {
         };
 
         ob = p.mkShell {
-          name = "work";
+          name = "ob";
           hardeningDisable = [ "all" ];
           packages = work_pkgs;
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/config
+            export OBS_K8S_SOCKS_PROXY=socks5://localhost:5000
             exec $HOME/.nix-profile/bin/zsh
-            OBS_K8S_SOCKS_PROXY=socks5://localhost:5000
           '';
           buildInputs = [
             p.sbt
