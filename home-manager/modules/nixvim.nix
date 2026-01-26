@@ -38,8 +38,6 @@ in{
         nixpkgs.pkgs = pkgs;
         enable = true;
         globals.mapleader = " ";
-        extraConfigLua = ''
-        '';
         opts = {
           relativenumber = true;
           number = true;
@@ -56,7 +54,38 @@ in{
           foldmethod = "indent";
           foldlevelstart = 99;
         };
+        extraPlugins = with pkgs.vimPlugins; [
+          fine-cmdline-nvim
+        ];
+        extraConfigLua = ''
+          require('fine-cmdline').setup({
+            popup = {
+              position = {
+                row = '50%',
+                col = '50%',
+              },
+            },
+          })
+        '';
         keymaps = [
+          {
+            mode = "n";
+            key = ":";
+            action = "<cmd>lua require('fine-cmdline').open()<CR>";
+            options = {
+              noremap = true;
+              silent = true;
+            };
+          }
+          {
+            mode = "v";
+            key = ":";
+            action = "<cmd>lua require('fine-cmdline').open({ default_input = '<,''>' })<CR>";
+            options = {
+              noremap = true;
+              silent = true;
+            };
+          }
           {
             action = "<C-w>";
             key = "<C-j>";
@@ -206,6 +235,14 @@ in{
           };
         };
         plugins = {
+          smear-cursor = {
+            enable = true;
+            settings = {
+              min_alpha = 0.1;
+              trail_length = 10;
+              fade_duration = 200;
+            };
+          };
           orgmode = {
             enable = true;
             settings = {
