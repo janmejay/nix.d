@@ -55,6 +55,7 @@ in
     watch
     nodejs_latest
     warpd
+    opencode
   ];
 
   programs.zsh = {
