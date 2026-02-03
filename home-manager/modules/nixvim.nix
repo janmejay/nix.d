@@ -39,6 +39,8 @@ in{
         enable = true;
         globals.mapleader = " ";
         opts = {
+          cmdheight = 0;
+          showmode = false;
           relativenumber = true;
           number = true;
           shiftwidth = 2;
@@ -61,7 +63,7 @@ in{
           require('fine-cmdline').setup({
             popup = {
               position = {
-                row = '50%',
+                row = '85%',
                 col = '50%',
               },
             },
@@ -228,21 +230,17 @@ in{
                 underline = false;
               };
               CursorLine = { bg = "#313244"; };
-              CursorLineNr = { fg = "#fab387"; bold = true; };
+              CursorLineNr = {
+                bg = "#cba6f7";
+                fg = "#1e1e2e";
+                bold = true;
+              };
               LineNr = { fg = "#bbbbbb"; };
               CmpBorder = { fg = "#ffffff";};
             };
           };
         };
         plugins = {
-          smear-cursor = {
-            enable = true;
-            settings = {
-              min_alpha = 0.1;
-              trail_length = 10;
-              fade_duration = 200;
-            };
-          };
           orgmode = {
             enable = true;
             settings = {

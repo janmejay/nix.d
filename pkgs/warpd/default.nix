@@ -7,13 +7,13 @@
 let
   warpd = stdenv.mkDerivation rec {
     pname = "warpd";
-    version = "1.3.5-osx";
+    version = "1.3.5-osx-dbg";
 
     src = fetchFromGitHub {
       owner = "janmejay";
       repo = "warpd";
-      rev = "71196910f8795a715ef35dc9067474c00da2b1e9";
-      hash = "sha256-b6ccfY31jz+iG2BcRnRAorcp6ETMMO38oFfyx/GW2tc=";
+      rev = "fd0f01e366706c8cab12a973b4bc3b2c34f2228e";
+      hash = "sha256-g6knKrg9dZ3ewpdSQnNs6fBTYMcRrW48j93m6h7kFpI=";
     };
 
     buildInputs = with pkgs; [
