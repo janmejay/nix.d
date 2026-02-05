@@ -82,7 +82,7 @@ in{
           {
             mode = "v";
             key = ":";
-            action = "<cmd>lua require('fine-cmdline').open({ default_input = '<,''>' })<CR>";
+            action = "<cmd>lua require('fine-cmdline').open({ default_value = \"'<,'>\" })<CR>";
             options = {
               noremap = true;
               silent = true;
