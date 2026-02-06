@@ -347,6 +347,13 @@ in{
               fzf-native.enable = true;
             };
             settings = {
+              defaults = {
+                mappings = {
+                  i = {
+                    "<C-f>" = mkRaw "require('telescope.actions').to_fuzzy_refine";
+                  };
+                };
+              };
               pickers = {
                 lsp_document_symbols = telescope_picker_config;
                 lsp_dynamic_workspace_symbols = telescope_picker_config;
