@@ -125,6 +125,7 @@ in {
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/config
             export OBS_K8S_SOCKS_PROXY=socks5://localhost:5000
+            export AWS_PROFILE=obs-admin
             exec $HOME/.nix-profile/bin/zsh
           '';
           buildInputs = [

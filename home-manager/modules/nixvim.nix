@@ -360,10 +360,18 @@ in{
                 find_files = {
                   follow = true;
                   hidden = true;
+                  layout_config = {
+                    width = 0.95;
+                    preview_width = 0.5;
+                  };
                 };
                 live_grep = {
                   follow = true;
                   additional_args = [ "--hidden" ];
+                  layout_config = {
+                    width = 0.95;
+                    preview_width = 0.5;
+                  };
                 };
                 registers = {
                   theme = "dropdown";
