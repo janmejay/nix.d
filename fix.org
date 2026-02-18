@@ -5,3 +5,5 @@
   * Create shortcut for copying file relative path to @+
   * Create shortcut for showing file relative path
   * Ensure `cargo` is not availble in base env (to avoid unwanted rebuilds)
+* jq
+  * [TODO] Add a helper that selects all objects by a certain criteria (having .containers)
