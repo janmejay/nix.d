@@ -3,7 +3,7 @@ let
   warpd = pkgs.callPackage ../../pkgs/warpd {};
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
-    rev = "14a02c65c34bed133b6e172ff76b9f07ade8f95b";
+    rev = "53e1206153d6753eaaa8d5fa62fe7fc8bfb2d732";
     submodules = true;
     ref = "master";
   };
