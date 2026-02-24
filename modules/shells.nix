@@ -136,7 +136,10 @@ in {
         s1 = p.mkShell {
           name = "s1";
           hardeningDisable = [ "all" ];
-          packages = work_pkgs ++ [ p.kubelogin-oidc ];
+          packages = work_pkgs ++ [
+            p.postgresql
+            p.kubelogin-oidc
+          ];
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/eks-config
             exec $HOME/.nix-profile/bin/zsh

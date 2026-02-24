@@ -7,3 +7,8 @@
   * Ensure `cargo` is not availble in base env (to avoid unwanted rebuilds)
 * jq
   * [DONE] Add a helper that selects all objects by a certain criteria (having .containers)
+* Tmux
+  * Add shortcut for next-prompt / last-prompt jumps
+    bind -T copy-mode n send-keys -X next-prompt
+    bind -T copy-mode p send-keys -X previous-prompt
+
