@@ -41,6 +41,7 @@ in {
             docker-compose
             python312Packages.virtualenv
             pstree
+            jwt-cli
           ];
      in {
         amm = p.mkShell {

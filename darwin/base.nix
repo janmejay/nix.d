@@ -67,6 +67,7 @@
         InitialKeyRepeat = 14;
         KeyRepeat = 2;
         ApplePressAndHoldEnabled = false;
+        AppleSpacesSwitchOnActivate = false;
       };
     };
   };
