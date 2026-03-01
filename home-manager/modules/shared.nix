@@ -1,9 +1,9 @@
-{ pkgs, user, ... }:
+{ pkgs, user, email, ... }:
 let 
   warpd = pkgs.callPackage ../../pkgs/warpd {};
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
-    rev = "53e1206153d6753eaaa8d5fa62fe7fc8bfb2d732";
+    rev = "c29f45280022dde066468de333a04694451681f4";
     submodules = true;
     ref = "master";
   };
@@ -29,12 +29,56 @@ in
     c = "bat";
   };
 
+  programs.git = {
+    enable = true;
+    settings = {
+      color.ui = "auto";
+      alias = {
+        ci = "commit";
+        co = "checkout";
+        st = "status";
+        ls = "branch -a";
+        cp = "cherry-pick";
+        stack = "!git-stack";
+        first-downstream = "!git-first-downstream";
+        local-commits = "!git-all-local-commits";
+        mark-landed = "!git-mark-branch-landed";
+        rebase-stacked = "!git-rebase-stacked-diff";
+        remove-deleted = "!git ls-files -d | xargs git rm";
+        add-untracked = "!git ls-files -o --exclude-standard | xargs git add -v";
+        add-remove = "!git remove-deleted && git add-untracked";
+        purge = "!git clean -fdx";
+        lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
+        graft = "!git-graft-stack";
+      };
+      core = {
+        editor = "nvim";
+        pager = "less -F -x4";
+      };
+      push.default = "current";
+      pull.rebase = false;
+      branch.autosetupmerge = "true";
+      gui = {
+        fontui = "-family \"Ubuntu Mono\" -size 5 -weight normal -slant roman -underline 0 -overstrike 0";
+        fontdiff = "-family \"Ubuntu Mono\" -size 5 -weight normal -slant roman -underline 0 -overstrike 0";
+      };
+      url = {
+        "git@github.com:" = {
+          insteadOf = "https://github.com/";
+        };
+      };
+      user = {
+        name = "Janmejay Singh";
+        email = email;
+      };
+    };
+  };
+
   home.file = {
     ".config" = {
       source = ../../dots/dot_config;
       recursive = true;
     };
-    ".gitconfig".source = ../../dots/gitconfig;
     ".dev_utils".source = dev-utils;
     ".jq".source = "${dev-utils}/rc/jq";
     ".tmux.conf".source = ../../dots/tmux.conf;

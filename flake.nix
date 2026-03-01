@@ -29,9 +29,9 @@
       pkgsl = nixpkgs.legacyPackages.${linuxSystem};
       pkgsd = nixpkgs.legacyPackages.${darwinSystem};
 
-      home-mgr-cfg-l = home-manager.lib.homeManagerConfiguration {
+      home-mgr-cfg-l = email : home-manager.lib.homeManagerConfiguration {
           pkgs = pkgsl;
-          extraSpecialArgs = { inherit inputs; };
+          extraSpecialArgs = { inherit inputs email; user = "janmejay"; };
           modules = [ 
             ({ ... }: {
               home.username = "janmejay";
@@ -63,9 +63,9 @@
         specialArgs = { inherit user host inputs; };
       };
 
-      home-mgr-cfg-d = {user, addons, ai ? "copilot"} : home-manager.lib.homeManagerConfiguration {
+      home-mgr-cfg-d = {user, email, addons, ai ? "copilot"} : home-manager.lib.homeManagerConfiguration {
         pkgs = pkgsd;
-        extraSpecialArgs = { inherit inputs nixvim user ai; };
+        extraSpecialArgs = { inherit inputs nixvim user ai email; };
         modules = [ 
             ({ ... }: {
               home.username = user;
@@ -92,12 +92,12 @@
 
       # Available through 'home-manager --flake .#janmejay@jnix'
       homeConfigurations = {
-        "janmejay@jnix" = home-mgr-cfg-l;
-        "janmejay@lenovo" = home-mgr-cfg-l;
-        "janmejay@dell" = home-mgr-cfg-l;
-        "janmejay@obsl" = home-mgr-cfg-l;
-        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; ai = "copilot"; addons = []; };
-        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; ai = "copilot"; addons = [./home-manager/addons/zscalar.nix]; };
+        "janmejay@jnix" = home-mgr-cfg-l "singh.janmejay@gmail.com";
+        "janmejay@lenovo" = home-mgr-cfg-l "singh.janmejay@gmail.com";
+        "janmejay@dell" = home-mgr-cfg-l "singh.janmejay@gmail.com";
+        "janmejay@obsl" = home-mgr-cfg-l "singh.janmejay@gmail.com";
+        "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; email = "singh.janmejay@gmail.com"; ai = "copilot"; addons = []; };
+        "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; email = "janmejay.singh@sentinelone.com"; ai = "copilot"; addons = [./home-manager/addons/zscalar.nix]; };
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;

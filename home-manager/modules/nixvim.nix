@@ -39,8 +39,6 @@ in{
         enable = true;
         globals.mapleader = " ";
         opts = {
-          cmdheight = 0;
-          showmode = false;
           relativenumber = true;
           number = true;
           shiftwidth = 2;
@@ -63,7 +61,7 @@ in{
           require('fine-cmdline').setup({
             popup = {
               position = {
-                row = '85%',
+                row = '90%',
                 col = '50%',
               },
             },
@@ -87,6 +85,10 @@ in{
               noremap = true;
               silent = true;
             };
+          }
+          {
+            key = "yp";
+            action = "<cmd>lua let @+=expand(\"%:.\")<CR>";
           }
           {
             action = "<C-w>";
