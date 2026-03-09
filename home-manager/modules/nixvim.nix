@@ -88,7 +88,7 @@ in{
           }
           {
             key = "yp";
-            action = "<cmd>lua let @+=expand(\"%:.\")<CR>";
+            action = "<cmd>let @+=expand(\"%:.\")<CR>";
           }
           {
             action = "<C-w>";
