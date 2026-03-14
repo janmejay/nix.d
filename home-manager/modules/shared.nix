@@ -100,6 +100,7 @@ in
     nodejs_latest
     warpd
     opencode
+    claude-code
   ];
 
   programs.zsh = {
@@ -114,6 +115,11 @@ in
         prompt_segment white black "$n/$SHLVL"
       fi
     }
+
+    PROMPT=$'%{\033]133;A\033\\%}'$PROMPT$'%{\033]133;B\033\\%}'
+    autoload -Uz add-zsh-hook
+    emit_cmd_start() { printf '\033]133;C\033\\' }
+    add-zsh-hook preexec emit_cmd_start
     '';
     oh-my-zsh= {
       enable = true;
