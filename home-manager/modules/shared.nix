@@ -82,6 +82,7 @@ in
     ".dev_utils".source = dev-utils;
     ".jq".source = "${dev-utils}/rc/jq";
     ".tmux.conf".source = ../../dots/tmux.conf;
+    ".claude/keybindings.json".source = ../../dots/claude-keybindings.json;
   };
 
   home.packages = with pkgs; [
