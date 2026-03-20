@@ -50,6 +50,7 @@ in
         purge = "!git clean -fdx";
         lg = "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --";
         graft = "!git-graft-stack";
+        wt = "worktree";
       };
       core = {
         editor = "nvim";

@@ -255,7 +255,11 @@ in{
           };
           nvim-surround.enable = true;
           actions-preview.enable = true;
-          treesitter.enable = true;
+          treesitter = {
+            enable = true;
+            grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+            settings.highlight.enable = true;
+          };
           lsp = {
             enable = true;
             servers = {
@@ -268,6 +272,10 @@ in{
               };
               protols.enable = true;
               nixd.enable = true;
+              pyright.enable = true;
+              clangd.enable = true;
+              jsonnet_ls.enable = true;
+              bashls.enable = true;
             };
             keymaps = {
               silent = true;
