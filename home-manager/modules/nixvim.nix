@@ -33,6 +33,8 @@ in{
   };
 
   config = lib.mkIf cfg.enable {
+    home.file.".config/sym_xlate.nvim.lua".source = ../../dots/sym_xlate.nvim.lua;
+
     programs.nixvim = {
       config = {
         nixpkgs.pkgs = pkgs;
@@ -66,6 +68,7 @@ in{
               },
             },
           })
+          vim.cmd('source ~/.config/sym_xlate.nvim.lua')
         '';
         keymaps = [
           {
