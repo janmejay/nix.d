@@ -61,11 +61,24 @@ in{
         ];
         extraConfigLua = ''
           require('fine-cmdline').setup({
+            cmdline = {
+              enable_keymaps = false,
+            },
             popup = {
               position = {
                 row = '90%',
                 col = '50%',
               },
+            },
+            hooks = {
+              set_keymaps = function(imap, feedkeys)
+                local fn = require('fine-cmdline').fn
+                imap('<C-p>', fn.up_search_history)
+                imap('<C-n>', fn.down_search_history)
+                imap('<Up>', fn.up_search_history)
+                imap('<Down>', fn.down_search_history)
+                imap('<Esc>', fn.close)
+              end,
             },
           })
           vim.cmd('source ~/.config/sym_xlate.nvim.lua')
