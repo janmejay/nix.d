@@ -15,3 +15,5 @@
 
 * Cmdline
   * Add helper for switching between recent git-branches (list item selection)
+* Aerospace
+  * Create a shortcut to kill `warpd` and write a loop-script that can restarts it when killed
