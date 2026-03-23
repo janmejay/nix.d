@@ -33,6 +33,8 @@ in{
   };
 
   config = lib.mkIf cfg.enable {
+    home.file.".config/sym_xlate.nvim.lua".source = ../../dots/sym_xlate.nvim.lua;
+
     programs.nixvim = {
       config = {
         nixpkgs.pkgs = pkgs;
@@ -59,13 +61,27 @@ in{
         ];
         extraConfigLua = ''
           require('fine-cmdline').setup({
+            cmdline = {
+              enable_keymaps = false,
+            },
             popup = {
               position = {
                 row = '90%',
                 col = '50%',
               },
             },
+            hooks = {
+              set_keymaps = function(imap, feedkeys)
+                local fn = require('fine-cmdline').fn
+                imap('<C-p>', fn.up_search_history)
+                imap('<C-n>', fn.down_search_history)
+                imap('<Up>', fn.up_search_history)
+                imap('<Down>', fn.down_search_history)
+                imap('<Esc>', fn.close)
+              end,
+            },
           })
+          vim.cmd('source ~/.config/sym_xlate.nvim.lua')
         '';
         keymaps = [
           {
@@ -252,7 +268,11 @@ in{
           };
           nvim-surround.enable = true;
           actions-preview.enable = true;
-          treesitter.enable = true;
+          treesitter = {
+            enable = true;
+            grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
+            settings.highlight.enable = true;
+          };
           lsp = {
             enable = true;
             servers = {
@@ -265,6 +285,10 @@ in{
               };
               protols.enable = true;
               nixd.enable = true;
+              pyright.enable = true;
+              clangd.enable = true;
+              jsonnet_ls.enable = true;
+              bashls.enable = true;
             };
             keymaps = {
               silent = true;
