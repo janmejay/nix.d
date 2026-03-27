@@ -9,9 +9,12 @@
   * [DONE] Add a helper that selects all objects by a certain criteria (having .containers)
   * [DONE] Enhance this ^ to allow picking the object without dereference
 * Tmux
-  * Add shortcut for next-prompt / last-prompt jumps
+  * [needs testing] Add shortcut for next-prompt / last-prompt jumps
     bind -T copy-mode n send-keys -X next-prompt
     bind -T copy-mode p send-keys -X previous-prompt
+  * [TODO] Increse clipboard size (200)
+  * [TODO] Check why `?` followed by n or Shift+n doesn't work (`/` does)
+  * Explore plugin for easy copy-mode
 
 * Cmdline
   * Add helper for switching between recent git-branches (list item selection)
