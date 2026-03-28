@@ -103,8 +103,9 @@ in{
             };
           }
           {
+            mode = "n";
             key = "yp";
-            action = "<cmd>let @+=expand(\"%:.\")<CR>";
+            action = "<cmd>let @+=expand(\"%:.\") . \":\" . line(\".\") | echo \"copied:\" @+<CR>";
           }
           {
             action = "<C-w>";
