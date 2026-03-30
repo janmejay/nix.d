@@ -78,6 +78,8 @@ in{
                 imap('<Up>', fn.up_search_history)
                 imap('<Down>', fn.down_search_history)
                 imap('<Esc>', fn.close)
+                imap('<Tab>', fn.complete_or_next_item)
+                imap('<S-Tab>', fn.previous_item)
               end,
             },
           })
