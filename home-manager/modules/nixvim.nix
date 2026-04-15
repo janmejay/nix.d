@@ -206,6 +206,10 @@ in{
             key = "gO";
           }
           {
+            action = mkRaw "vim.diagnostic.open_float";
+            key = "<leader>e";
+          }
+          {
             action = "<CMD>Lspsaga hover_doc<Enter>";
             key = "K";
           }
