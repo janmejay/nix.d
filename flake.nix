@@ -87,7 +87,7 @@
 
       darwinConfigurations = {
         jpl = darwin-cfg { user = "janmejay"; host = "jpl"; addons = []; };
-        js1 = darwin-cfg { user = "janmejay.singh"; host = "LCY79567W2"; addons = [./darwin/zscalar.nix];};
+        js1 = darwin-cfg { user = "janmejay.singh"; host = "HV9JX62PP7"; addons = [./darwin/zscalar.nix];};
       };	
 
       # Available through 'home-manager --flake .#janmejay@jnix'

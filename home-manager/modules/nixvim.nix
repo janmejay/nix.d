@@ -174,7 +174,7 @@ in{
             key = "gt";
           }
           {
-            action = mkRaw "require('actions-preview').code_actions";
+            action = mkRaw "require('fastaction').code_action";
             key = "g/";
           }
           {
@@ -274,7 +274,7 @@ in{
             };
           };
           nvim-surround.enable = true;
-          actions-preview.enable = true;
+          fastaction.enable = true;
           treesitter = {
             enable = true;
             grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
