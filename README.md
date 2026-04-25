@@ -25,7 +25,9 @@ _Upgrade_
 
 $ nix flake update
 $ nix flake check
-$ sudo nixos-rebuild switch --flake .#<host>
+rebuild base:
+    $ sudo nixos-rebuild switch --flake .#<host>
+    $ sudo darwin-rebuild switch --flake .#jpl
 $ home-manager switch --flake .#janmejay@<hostname>
 
 

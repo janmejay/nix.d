@@ -73,6 +73,7 @@ in
         email = email;
       };
     };
+    signing.format = null;
   };
 
   home.file = {
