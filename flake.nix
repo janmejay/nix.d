@@ -79,7 +79,6 @@
 
       # build: 'nixos-rebuild --flake .#the-hostname'
       nixosConfigurations = {
-        jnix = linux-cfg ./nixos/jnix/configuration.nix;
         lenovo = linux-cfg ./nixos/lenovo/configuration.nix;
         dell = linux-cfg ./nixos/dell/configuration.nix;
         obsl = linux-cfg ./nixos/obsl/configuration.nix;

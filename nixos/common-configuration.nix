@@ -35,6 +35,7 @@ in {
 
   fileSystems."/home/janmejay/projects" = {
     device = "/mnt/work/projects";
+    fsType = "none";
     options = [ "bind" ];
   };
 
