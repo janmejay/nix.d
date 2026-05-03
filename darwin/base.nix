@@ -15,7 +15,6 @@
     fd
     bat
     eza
-    zsh
     aerospace
     gnupg
     gnugrep
@@ -39,7 +38,7 @@
   ];
   users.users."${user}" = {
     home = "/Users/${user}";
-    shell = pkgs.zsh;
+    shell = "/bin/zsh";
   };
   homebrew = {
     enable = true;
@@ -50,7 +49,6 @@
       "copyq"
     ];
   };
-  programs.zsh.enable = true;
   nix = {
     enable = true;
     extraOptions = ''
