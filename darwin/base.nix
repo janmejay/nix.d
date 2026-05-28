@@ -44,10 +44,11 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
-    casks = [ 
+    casks = [
       "karabiner-elements"
       "intellij-idea-ce"
       "copyq"
+      "claude"
     ];
   };
   nix = {
