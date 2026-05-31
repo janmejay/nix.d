@@ -13,4 +13,4 @@ hint_chars: abcdef;ghijklmnopqrst'uvwx[yz
 copy_and_exit: esc y
 scroll_down: S-j
 scroll_up: S-k
-
+enable_action_log: 1

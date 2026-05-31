@@ -12,8 +12,8 @@ let
     src = fetchFromGitHub {
       owner = "janmejay";
       repo = "warpd";
-      rev = "42e9fceb2144c0a8901f380fc60ef1702fe51193";
-      hash = "sha256-tY5+YBxw5B/IIS+1IM92iMkS0ddTQ6dOc2NmWrbG+gg=";
+      rev = "4e312e731d568260cc4b81895f8050c1c7f2871b";
+      hash = "sha256-DoHMF4Lsux2ppTMBeuvtx25n6OANxBM3oC/Gk2SM5SU=";
     };
 
     buildInputs = with pkgs; [
