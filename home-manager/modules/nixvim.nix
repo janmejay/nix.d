@@ -296,6 +296,7 @@ in{
               clangd.enable = true;
               jsonnet_ls.enable = true;
               bashls.enable = true;
+              helm_ls.enable = true;
             };
             keymaps = {
               silent = true;
@@ -442,7 +443,12 @@ in{
           {
             event = [ "TextYankPost" ];
             command = "lua vim.highlight.on_yank()";
-            pattern = "*"; 
+            pattern = "*";
+          }
+          {
+            event = [ "BufRead" "BufNewFile" ];
+            pattern = [ "*/templates/*.yaml" "*/templates/*.tpl" "*/templates/*.txt" ];
+            command = "set filetype=helm";
           }
         ];
       };
