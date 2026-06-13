@@ -41,6 +41,8 @@ in{
         enable = true;
         globals.mapleader = " ";
         opts = {
+          title = true;
+          titlestring = "nvim: %{fnamemodify(getcwd(), ':~')}";
           relativenumber = true;
           number = true;
           shiftwidth = 2;
