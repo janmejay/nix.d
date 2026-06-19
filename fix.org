@@ -5,6 +5,7 @@
   * [DONE] Create shortcut for copying file relative path to @+
   * Create shortcut for showing file relative path
   * Ensure `cargo` is not availble in base env (to avoid unwanted rebuilds)
+  * Learn shortcut for removing a bookmark
 * jq
   * [DONE] Add a helper that selects all objects by a certain criteria (having .containers)
   * [DONE] Enhance this ^ to allow picking the object without dereference
@@ -15,8 +16,14 @@
   * [TODO] Increse clipboard size (200)
   * [TODO] Check why `?` followed by n or Shift+n doesn't work (`/` does)
   * Explore plugin for easy copy-mode
+  * Fix clip <foo> x (to use maccy)
 
 * Cmdline
   * Add helper for switching between recent git-branches (list item selection)
+  * Add a helper to make k8s namespace selection automatic (at the level of each shell)
+  * Make `kctl exec` automatically add bash (if not specified)
 * Aerospace
   * Create a shortcut to kill `warpd` and write a loop-script that can restarts it when killed
+* Warpd
+  * Ensure it is aware of current workspace in multi-monitor setup. At the moment it keeps painting hints on the wrong screen until I switch to it and switch back.
+  * Ensure warpd makes a buzz when an incorrect shortcut is pressed (or blinks the entire window)
