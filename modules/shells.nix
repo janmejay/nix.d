@@ -42,6 +42,7 @@ in {
             python312Packages.virtualenv
             pstree
             jwt-cli
+            python313Packages.tox
           ];
      in {
         amm = p.mkShell {
@@ -124,9 +125,23 @@ in {
           hardeningDisable = [ "all" ];
           packages = work_pkgs;
           shellHook = ''
-            export KUBECONFIG=$HOME/.kube/config
+            export KUBECONFIG=$HOME/.kube/ob-config
             export OBS_K8S_SOCKS_PROXY=socks5://localhost:5000
             export AWS_PROFILE=ob
+            exec ${if system == "aarch64-darwin" then "/bin/zsh" else "$HOME/.nix-profile/bin/zsh"}
+          '';
+          buildInputs = [
+            p.sbt
+          ];
+        };
+
+        ob-dev = p.mkShell {
+          name = "ob-dv";
+          hardeningDisable = [ "all" ];
+          packages = work_pkgs;
+          shellHook = ''
+            export KUBECONFIG=$HOME/.kube/ob-dev-config
+            export AWS_PROFILE=ob-dev
             exec ${if system == "aarch64-darwin" then "/bin/zsh" else "$HOME/.nix-profile/bin/zsh"}
           '';
           buildInputs = [

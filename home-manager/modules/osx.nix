@@ -8,11 +8,14 @@ in
   };
 
   config = lib.mkIf cfg.enable {
-    home.packages = with pkgs; [ ];
+    home.packages = with pkgs; [ 
+      choose-gui
+    ];
 
     home.file = {
       ".config/karabiner/assets/complex_modifications/cmd_ctrl.json".source = ../../dots/karabiner/complex_modifications/cmd_ctrl.json;
       ".config/aerospace/aerospace.toml".source = ../../dots/aerospace.toml;
+      ".config/ghostty/config".source = ../../dots/ghostty/config;
     };
 
     # Keep `programs.zsh` enabled (in shared.nix) so home-manager keeps

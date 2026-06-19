@@ -1,11 +1,13 @@
 * Nvim
-  * Enable windsurf (stuck at non-free license)
+  * [DROP] Enable windsurf (stuck at non-free license)
   * [DONE] Create keyboard shortcuts for :cnext, :cprev etc
   * [DONE] Improve neotree toggle
   * [DONE] Create shortcut for copying file relative path to @+
-  * Create shortcut for showing file relative path
+  * [DONE] Create shortcut for showing file relative path
   * Ensure `cargo` is not availble in base env (to avoid unwanted rebuilds)
   * Learn shortcut for removing a bookmark
+  * Install `nvim-bfq` for better quicklist usage
+  * Figure out why undo doesn't work sometimes
 * jq
   * [DONE] Add a helper that selects all objects by a certain criteria (having .containers)
   * [DONE] Enhance this ^ to allow picking the object without dereference
