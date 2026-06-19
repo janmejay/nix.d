@@ -8,7 +8,7 @@
     google-chrome
     git
     wezterm
-    ghostty-bin
+    alacritty
     neovim
     home-manager
     tmux
