@@ -40,15 +40,15 @@ duration = 0
 # Wezterm default palette (wezterm-term/src/color.rs default scheme).
 [colors.primary]
 background = "#000000"
-foreground = "#b3b3b3"
+foreground = "#d8d8d8"
 
 [colors.cursor]
 text = "#000000"
-cursor = "#b3b3b3"
+cursor = "#d8d8d8"
 
 [colors.selection]
 text = "#000000"
-background = "#b3b3b3"
+background = "#d8d8d8"
 
 [colors.normal]
 black   = "#000000"

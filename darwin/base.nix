@@ -9,6 +9,7 @@
     git
     wezterm
     alacritty
+    ghostty-bin
     neovim
     home-manager
     tmux

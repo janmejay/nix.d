@@ -90,7 +90,7 @@ automatically-unhide-macos-hidden-apps = false
     #     activate
     # end tell'
     # '''
-    cmd-shift-enter = "exec-and-forget /bin/zsh -l -c 'open -n -a /run/current-system/sw/bin/wezterm --args -e /run/current-system/sw/bin/tmux'"
+    cmd-shift-enter = "exec-and-forget /bin/zsh -l -c 'open -n -a /run/current-system/sw/bin/ghostty --args -e /run/current-system/sw/bin/tmux'"
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#layout
     alt-space = 'layout tiles horizontal vertical'

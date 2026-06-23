@@ -1,0 +1,95 @@
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+
+# Start from the wezterm pastel-dark palette but bump the "normal" entries
+# ~5% brighter — ghostty's color rendering reads dimmer than wezterm's on
+# macOS even with identical hex values. Bright entries are already at peak
+# saturation so they stay put.
+background = #000000
+foreground = #bababa
+cursor-color = #bababa
+selection-foreground = #000000
+selection-background = #bababa
+
+palette = 0=#000000
+palette = 1=#d15b5b
+palette = 2=#5bcf5b
+palette = 3=#d2d200
+palette = 4=#5e5ed1
+palette = 5=#d15bd1
+palette = 6=#81cece
+palette = 7=#d0d0d0
+palette = 8=#5a5a5a
+palette = 9=#ff5555
+palette = 10=#55ff55
+palette = 11=#ffff55
+palette = 12=#5555ff
+palette = 13=#ff55ff
+palette = 14=#55ffff
+palette = 15=#ffffff
+
+macos-titlebar-style = hidden
+window-decoration = false
+
+bell-features = no-system,no-audio,no-attention,no-title,no-border
+
+keybind = ctrl+shift+v=paste_from_clipboard
+
+# Font size adjustments (matches wezterm's ctrl+shift+=/-).
+keybind = ctrl+shift+==increase_font_size:1
+keybind = ctrl+shift++=increase_font_size:1
+keybind = ctrl+shift+-=decrease_font_size:1
+keybind = ctrl+shift+0=reset_font_size
+
+# Disable cmd+w — it's too easy to hit by accident and close the window.
+keybind = cmd+w=ignore
+keybind = cmd+shift+w=ignore
+keybind = cmd+alt+w=ignore
+
+# Map cmd+<char> to alt+<char> (send ESC+<char>) so cmd works as Meta.
+# Mirrors dot_config/wezterm/wezterm.lua. Excludes q, w, n.
+keybind = cmd+`=esc:`
+keybind = cmd+1=esc:1
+keybind = cmd+2=esc:2
+keybind = cmd+3=esc:3
+keybind = cmd+4=esc:4
+keybind = cmd+5=esc:5
+keybind = cmd+6=esc:6
+keybind = cmd+7=esc:7
+keybind = cmd+8=esc:8
+keybind = cmd+9=esc:9
+keybind = cmd+0=esc:0
+keybind = cmd+-=esc:-
+keybind = cmd+==esc:=
+keybind = cmd+e=esc:e
+keybind = cmd+r=esc:r
+keybind = cmd+t=esc:t
+keybind = cmd+y=esc:y
+keybind = cmd+u=esc:u
+keybind = cmd+i=esc:i
+keybind = cmd+o=esc:o
+keybind = cmd+p=esc:p
+keybind = cmd+[=esc:[
+keybind = cmd+]=esc:]
+keybind = cmd+\=text:\x1b\\
+keybind = cmd+a=esc:a
+keybind = cmd+s=esc:s
+keybind = cmd+d=esc:d
+keybind = cmd+f=esc:f
+keybind = cmd+g=esc:g
+keybind = cmd+h=esc:h
+keybind = cmd+j=esc:j
+keybind = cmd+k=esc:k
+keybind = cmd+l=esc:l
+keybind = cmd+;=esc:;
+keybind = cmd+'=esc:'
+keybind = cmd+z=esc:z
+keybind = cmd+x=esc:x
+keybind = cmd+c=esc:c
+keybind = cmd+v=esc:v
+keybind = cmd+b=esc:b
+keybind = cmd+m=esc:m
+keybind = cmd+,=esc:,
+keybind = cmd+.=esc:.
+keybind = cmd+/=esc:/
+keybind = cmd+backspace=text:\x1b\x7f
