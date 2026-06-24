@@ -152,12 +152,15 @@ in {
         s1 = p.mkShell {
           name = "s1";
           hardeningDisable = [ "all" ];
+          # curl https://raw.githubusercontent.com/scalyr/scalyr-tool/master/scalyr > ~/ob/tools/scalyr
           packages = work_pkgs ++ [
             p.postgresql
             p.kubelogin-oidc
           ];
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/eks-config
+            . ~/ob/.sec/env.sh
+            PATH=$PATH:~/ob/tools
             exec ${if system == "aarch64-darwin" then "/bin/zsh" else "$HOME/.nix-profile/bin/zsh"}
           '';
         };
