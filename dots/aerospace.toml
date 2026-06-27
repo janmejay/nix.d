@@ -37,6 +37,9 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 # Also see: https://nikitabobko.github.io/AeroSpace/goodies#disable-hide-app
 automatically-unhide-macos-hidden-apps = false
 
+[exec]
+    env-vars.PATH = "/Users/janmejay.singh/.dev_utils:/Users/janmejay.singh/.nix-profile/bin:/run/current-system/sw/bin:/usr/bin:/bin"
+
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping
 [key-mapping]
@@ -140,7 +143,8 @@ automatically-unhide-macos-hidden-apps = false
     alt-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
     # Fuzzy window switcher (choose-gui + aerospace list-windows).
-    alt-p = "exec-and-forget /bin/zsh -l -c '/Users/janmejay.singh/projects/dev_utils/aerospace_windows.sh'"
+    alt-p = 'exec-and-forget aerospace_windows.sh focus'
+    alt-x = 'exec-and-forget aerospace_windows.sh close'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#mode
     alt-shift-semicolon = 'mode service'

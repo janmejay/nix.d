@@ -24,6 +24,7 @@
   * Add helper for switching between recent git-branches (list item selection)
   * Add a helper to make k8s namespace selection automatic (at the level of each shell)
   * Make `kctl exec` automatically add bash (if not specified)
+  * Fix `clip ... x` (make it talk to maccy, instead of looking for copyq)
 * Aerospace
   * Create a shortcut to kill `warpd` and write a loop-script that can restarts it when killed
 * Warpd
