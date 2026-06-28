@@ -8,7 +8,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
-    nix-homebrew.url = "github:zhaofengli/nix-homebrew"; 
+    nix-homebrew.url = "github:zhaofengli/nix-homebrew";
+    homebrew-core = { url = "github:homebrew/homebrew-core"; flake = false; };
+    homebrew-cask = { url = "github:homebrew/homebrew-cask"; flake = false; };
+    homebrew-bundle = { url = "github:homebrew/homebrew-bundle"; flake = false; };
 
     home-manager.url = "github:nix-community/home-manager";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
@@ -57,6 +60,13 @@
               enable = true;
               enableRosetta = true;
               user = user;
+              taps = {
+                "homebrew/core" = inputs.homebrew-core;
+                "homebrew/cask" = inputs.homebrew-cask;
+                "homebrew/bundle" = inputs.homebrew-bundle;
+              };
+              mutableTaps = false;
+              autoMigrate = true;
             };
           }
         ] ++ addons;

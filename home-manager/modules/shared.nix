@@ -92,14 +92,13 @@ in
     eza
     bat
     fzf
-    silver-searcher
     jq
     ripgrep
     tree
     fd
     yazi
     watch
-    nodejs_latest
+    nodejs
     warpd
     opencode
     claude-code
