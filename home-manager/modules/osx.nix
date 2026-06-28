@@ -25,7 +25,7 @@ let
     profiles = [ {
       name = "Default profile";
       selected = true;
-      virtual_hid_keyboard = { country_code = 0; keyboard_type_v2 = "ansi"; };
+      virtual_hid_keyboard = { country_code = 0; keyboard_type_v2 = "ansi"; indicate_sticky_modifier_keys_state = false; };
       complex_modifications.rules = [
         {
           description = "left_command: Escape on tap, Command on hold";
