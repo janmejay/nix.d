@@ -1,0 +1,59 @@
+{
+    "profiles": [
+        {
+            "name": "Default profile",
+            "selected": true,
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "keyboard_type_v2": "ansi"
+            },
+            "complex_modifications": {
+                "rules": [
+                    {
+                        "description": "Make left_command act as Escape when tapped, Command when held",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "left_command",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_command" }],
+                                "to_if_alone": [{ "key_code": "escape" }]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Make caps_lock act as left_control",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "left_control" }]
+                            }
+                        ]
+                    },
+                    {
+                        "description": "Sticky Right Shift \u2014 tap to toggle shift lock",
+                        "manipulators": [
+                            {
+                                "type": "basic",
+                                "from": {
+                                    "key_code": "right_shift",
+                                    "modifiers": { "optional": ["any"] }
+                                },
+                                "to": [{ "key_code": "right_shift", "lazy": true }],
+                                "to_if_alone": [
+                                    { "sticky_modifier": { "left_shift": "toggle" } }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

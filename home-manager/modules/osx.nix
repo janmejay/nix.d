@@ -13,7 +13,7 @@ in
     ];
 
     home.file = {
-      ".config/karabiner/assets/complex_modifications/cmd_ctrl.json".source = ../../dots/karabiner/complex_modifications/cmd_ctrl.json;
+      ".config/karabiner/karabiner.json".source = ../../dots/karabiner/karabiner.json;
       ".config/aerospace/aerospace.toml".source = ../../dots/aerospace.toml;
       ".config/alacritty/alacritty.toml".source = ../../dots/alacritty/alacritty.toml;
       ".config/ghostty/config".source = ../../dots/ghostty/config;
