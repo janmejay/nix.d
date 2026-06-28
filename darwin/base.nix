@@ -32,7 +32,6 @@
     source-code-pro
     noto-fonts
     noto-fonts-cjk-sans
-    noto-fonts-color-emoji
     liberation_ttf
     fira-code
     fira-code-symbols
@@ -46,6 +45,7 @@
   homebrew = {
     enable = true;
     onActivation.cleanup = "zap";
+    onActivation.upgrade = true;
     casks = [
       "karabiner-elements"
       "intellij-idea-ce"
