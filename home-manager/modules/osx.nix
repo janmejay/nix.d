@@ -45,6 +45,15 @@ let
           } ];
         }
         {
+          description = "left_shift tap arms one-shot shift (next key only; hold still acts as shift)";
+          manipulators = [ {
+            type = "basic";
+            from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+            to = [ { key_code = "left_shift"; lazy = true; } ];
+            to_if_alone = [ { sticky_modifier = { left_shift = "on"; }; } ];
+          } ];
+        }
+        {
           description = "right_shift tap toggles shift_lock (hold still acts as shift)";
           manipulators = [
             {
