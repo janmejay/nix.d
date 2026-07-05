@@ -57,6 +57,7 @@ in{
           foldenable = true;
           foldmethod = "indent";
           foldlevelstart = 99;
+          undofile = true;
         };
         extraPlugins = with pkgs.vimPlugins; [
           fine-cmdline-nvim
@@ -86,6 +87,15 @@ in{
             },
           })
           vim.cmd('source ~/.config/sym_xlate.nvim.lua')
+
+          do
+            local undodir = vim.fn.stdpath('run') .. '/nvim-undo-' .. vim.fn.getpid()
+            vim.fn.mkdir(undodir, 'p')
+            vim.opt.undodir = undodir
+            vim.api.nvim_create_autocmd('VimLeavePre', {
+              callback = function() vim.fn.delete(undodir, 'rf') end,
+            })
+          end
         '';
         keymaps = [
           {
@@ -377,6 +387,7 @@ in{
           neo-tree.enable = true;
           web-devicons.enable = true;
           marks.enable = true;
+          nvim-bqf.enable = true;
           telescope = {
             enable = true;
             extensions = {
