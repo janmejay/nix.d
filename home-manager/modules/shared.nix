@@ -83,7 +83,29 @@ in
     };
     ".dev_utils".source = dev-utils;
     ".jq".source = "${dev-utils}/rc/jq";
-    ".tmux.conf".source = ../../dots/tmux.conf;
+  };
+
+  programs.tmux = {
+    enable = true;
+    shortcut = "j";
+    keyMode = "vi";
+    terminal = "tmux-256color";
+    historyLimit = 100000;
+    escapeTime = 10;
+    mouse = false;
+    extraConfig = builtins.readFile ../../dots/tmux.conf;
+    plugins = [
+      {
+        plugin = pkgs.tmuxPlugins.tmux-thumbs;
+        extraConfig = ''
+          set -g @thumbs-key u
+          set -g @thumbs-command 'echo -n {} | pbcopy'
+          set -g @thumbs-fg-color cyan
+          set -g @thumbs-hint-bg-color red
+          set -g @thumbs-hint-fg-color white
+        '';
+      }
+    ];
   };
 
   home.packages = with pkgs; [
