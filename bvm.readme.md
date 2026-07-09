@@ -8,7 +8,7 @@ Files: `lima/bvm.yaml` · `nixos/bvm/configuration.nix` · `nixos/zscalar.nix` �
 
 ## One time (Mac)
 ```bash
-cp /etc/nix/ca_cert.pem ~/.zscaler-ca.pem          # Zscaler ON: stage CA bundle for the VM
+home-manager switch --flake .#janmejay@js1         # generates ~/.zscaler-ca.pem for the VM
 sudo systemsetup -setremotelogin on                # for `git clone host:...` from the VM
 cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
