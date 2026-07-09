@@ -1,6 +1,5 @@
-{ pkgs, user, email, ... }:
-let 
-  warpd = pkgs.callPackage ../../pkgs/warpd {};
+{ pkgs, lib, user, email, ... }:
+let
   dev-utils = builtins.fetchGit {
     url = "https://github.com/janmejay/dev_utils.git";
     rev = "e005ae8e120950dc123acc17441deaf5dd0a166a";
@@ -121,7 +120,6 @@ in
     yazi
     watch
     nodejs
-    warpd
     opencode
     claude-code
     lima
@@ -148,7 +146,7 @@ in
     oh-my-zsh= {
       enable = true;
       plugins = ["git" "python" "docker" "fzf"];
-      theme = "agnoster";
+      theme = lib.mkDefault "agnoster";
     };
   };
 

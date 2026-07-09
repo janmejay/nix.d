@@ -16,6 +16,16 @@
 
   users.defaultUserShell = pkgs.zsh;
   programs.zsh.enable = true;
+  environment.shells = [ pkgs.zsh ];
+
+  # lima-init creates the `lima` user imperatively (mutableUsers = true), so its
+  # login shell can't be set via users.users without fighting lima-init. Enforce
+  # zsh at each activation instead; takes effect on the next boot.
+  system.activationScripts.limaLoginShell.text = ''
+    if id lima >/dev/null 2>&1; then
+      ${pkgs.shadow}/bin/usermod --shell /run/current-system/sw/bin/zsh lima || true
+    fi
+  '';
   programs.gnupg.agent = {
     enable = true;
     enableSSHSupport = true;

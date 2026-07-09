@@ -2,6 +2,8 @@
 let
   cfg = config.osx;
 
+  warpd = pkgs.callPackage ../../pkgs/warpd {};
+
   # Keys that get left_shift injected while shift_lock is on. Covers all
   # printable ANSI keys with a shifted form; arrows/fn keys are intentionally
   # excluded so shift+arrow selection isn't broken by the lock.
@@ -90,6 +92,7 @@ in
   config = lib.mkIf cfg.enable {
     home.packages = with pkgs; [
       choose-gui
+      warpd
     ];
 
     home.file = {

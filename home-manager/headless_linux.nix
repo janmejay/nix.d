@@ -5,4 +5,6 @@
 
   linux.headless.enable = true;
   nixvim.enable = true;
+
+  programs.zsh.oh-my-zsh.theme = "sunaku";
 }

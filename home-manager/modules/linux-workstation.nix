@@ -2,7 +2,6 @@
 let
   cfg = config.linux.workstation;
 
-  warpd = pkgs.callPackage ../../pkgs/warpd {};
   hackery = pkgs.callPackage ../../pkgs/hackery {};
   find-cursor = pkgs.callPackage ../../pkgs/find-cursor {};
 in
@@ -18,7 +17,6 @@ in
 
     home.packages = with pkgs; [
       # local (custom) v
-      warpd
       hackery
       copyq
       find-cursor

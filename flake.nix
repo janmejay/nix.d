@@ -130,7 +130,7 @@
         # Verify home dir in the VM with `echo $HOME` and adjust if it differs.
         "lima@bvm" = home-manager.lib.homeManagerConfiguration {
           pkgs = nixpkgs.legacyPackages."aarch64-linux";
-          extraSpecialArgs = { inherit inputs; email = "janmejay.singh@sentinelone.com"; user = "lima"; };
+          extraSpecialArgs = { inherit inputs; email = "janmejay.singh@sentinelone.com"; user = "lima"; ai = "copilot"; };
           modules = [
             ({ ... }: {
               home.username = "lima";
