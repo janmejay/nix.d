@@ -5,6 +5,7 @@
   
   emacs.enable = true;
   http-cache.enable = true;
-  linux.enable = true;
+  linux.headless.enable = true;
+  linux.workstation.enable = true;
   nixvim.enable = false;
 }

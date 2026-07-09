@@ -124,6 +124,7 @@ in
     warpd
     opencode
     claude-code
+    lima
   ];
 
   programs.zsh = {

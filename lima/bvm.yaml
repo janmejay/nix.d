@@ -1,0 +1,55 @@
+# NixOS-on-Lima build VM ("bvm").
+# Boots a prebuilt nixos-lima release image, then is customized via
+# `nixos-rebuild --flake <repo>#bvm` from inside the guest (see bvm.readme.md).
+#
+# Bring up:  limactl start ./lima/bvm.yaml --name bvm
+
+vmType: "vz"                 # Apple Virtualization.framework — the fast path.
+                             # nixos-lima supports vz (issues #1/#10); qcow2+qemu+9p
+                             # was the slow one we're avoiding. Needs a recent Lima (2.x).
+rosetta:
+  enabled: true              # fast x86_64 translation for the odd non-arm64 binary
+mountType: "virtiofs"
+
+# Sized for building ~/ob/vector (Rust, ~165G on host incl. artifacts) + vrl/manager.
+# Host is 16 cores / 48 GiB. Disk is sparse (only used space is consumed).
+cpus: 12                     # leave ~4 cores for macOS (and colima, if running)
+memory: "24GiB"              # Rust/vector links are RAM-hungry; bump to 32GiB on OOM
+disk: "250GiB"               # vector tree + target/ + /nix store + other repos
+
+images:
+  - location: "https://github.com/nixos-lima/nixos-lima/releases/download/v0.2.1/nixos-lima-v0.2.1-aarch64.qcow2"
+    arch: "aarch64"
+    digest: "sha512:748c723b69dbdec40a9acaf78cc9070ae784dcb64b0856ab906efdac822d9abcc65565b8f8dfa4cf8b49cc6c12c372072e83bb5ed9247330a7c22675d9e141ce"
+  - location: "https://github.com/nixos-lima/nixos-lima/releases/download/v0.2.1/nixos-lima-v0.2.1-x86_64.qcow2"
+    arch: "x86_64"
+    digest: "sha512:636c9c24d7aea340c808e72802cd05589d18c1bbeda45242e3c4725cdfdcc497cfdfd4dfecd76e4be7b8de3a688a1046f269c072bce487c0b06a60515262995e"
+
+ssh:
+  loadDotSSHPubKeys: true     # copy host ~/.ssh/*.pub into guest authorized_keys (NOT hardcoded)
+  forwardAgent: true          # so `git clone ssh://host/...` in the VM uses your host key via the agent
+
+mounts:
+  - location: "~"             # host home, read-only: reach the flake repo + seed clones
+    writable: false
+  - location: "/tmp/lima"
+    writable: true
+
+portForwards:
+  - proto: udp                # NixOS DHCP quirk (nixos-lima#50)
+    guestPort: 68
+    guestIP: 0.0.0.0
+    ignore: true
+
+containerd:
+  system: false
+  user: false
+
+# --- Fallback if the image will not boot under vz ---------------------------
+# nixos-lima's tested default is qemu + 9p. If `limactl start` fails under vz,
+# set:  vmType: "qemu"  and  mountType: "9p"  (drop the rosetta block), e.g.:
+#   mounts:
+#     - {location: "~", writable: false, 9p: {cache: "mmap"}}
+#     - {location: "/tmp/lima", writable: true, 9p: {cache: "mmap"}}
+# Builds stay fast either way — source lives on the VM's native disk, and the
+# CPU is HVF-accelerated under qemu too.

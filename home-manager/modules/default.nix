@@ -4,7 +4,8 @@
     ./shared.nix
     ./emacs.nix
     ./http-cache.nix
-    ./linux.nix
+    ./linux-headless.nix
+    ./linux-workstation.nix
     ./osx.nix
     ./nixvim.nix
   ];
