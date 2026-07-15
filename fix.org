@@ -8,6 +8,8 @@
   * Learn shortcut for removing a bookmark
   * [DONE] Install `nvim-bfq` for better quicklist usage
   * Figure out why undo doesn't work sometimes
+  * Create a line on lhs to show foldable section boundaries
+  * Make bfq pane taller (% of window length)
 * jq
   * [DONE] Add a helper that selects all objects by a certain criteria (having .containers)
   * [DONE] Enhance this ^ to allow picking the object without dereference
