@@ -1,4 +1,4 @@
-{ ... }:
+{ hostUser, ... }:
 {
   imports = [ ./headless_linux.nix ];
 
@@ -10,7 +10,7 @@
     enableDefaultConfig = false;
     settings."host" = {
       HostName = "host.lima.internal";
-      User = "janmejay.singh";
+      User = hostUser;
     };
   };
 }

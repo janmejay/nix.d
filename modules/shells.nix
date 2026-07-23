@@ -18,7 +18,6 @@ in {
             k9s
             kubernetes-helm
             grpcurl
-            gh
             yq
             graphqurl
             visualvm

@@ -7,6 +7,10 @@
 vmType: "vz"                 # Apple Virtualization.framework — the fast path.
                              # nixos-lima supports vz (issues #1/#10); qcow2+qemu+9p
                              # was the slow one we're avoiding. Needs a recent Lima (2.x).
+
+user:
+  name: "lima"               # pin the guest user (else Lima derives it from $USER)
+  home: "/home/lima"         # native dir; host home mounts separately at /Users/<user>
 rosetta:
   enabled: true              # fast x86_64 translation for the odd non-arm64 binary
 mountType: "virtiofs"

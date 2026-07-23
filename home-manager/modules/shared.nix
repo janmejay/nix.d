@@ -123,6 +123,7 @@ in
     opencode
     claude-code
     lima
+    gh
   ];
 
   programs.zsh = {

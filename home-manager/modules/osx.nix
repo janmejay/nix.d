@@ -16,7 +16,15 @@ let
       "semicolon" "quote"
       "comma" "period" "slash" ];
 
-  applyShift = key: {
+  applyOneShot = key: {
+    type = "basic";
+    from = { key_code = key; };
+    to = [ { key_code = key; modifiers = [ "left_shift" ]; }
+           { set_variable = { name = "oneshot_shift"; value = 0; }; } ];
+    conditions = [ { type = "variable_if"; name = "oneshot_shift"; value = 1; } ];
+  };
+
+  applyLock = key: {
     type = "basic";
     from = { key_code = key; };
     to = [ { key_code = key; modifiers = [ "left_shift" ]; } ];
@@ -47,24 +55,40 @@ let
           } ];
         }
         {
-          description = "left_shift tap arms one-shot shift (next key only; hold still acts as shift)";
-          manipulators = [ {
-            type = "basic";
-            from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
-            to = [ { key_code = "left_shift"; lazy = true; } ];
-            to_if_alone = [ { sticky_modifier = { left_shift = "on"; }; } ];
-          } ];
-        }
-        {
-          description = "right_shift tap toggles shift_lock (hold still acts as shift)";
+          description = "left_shift tap toggles persistent shift_lock (clears pending one-shot if armed; hold still acts as shift)";
           manipulators = [
             {
               type = "basic";
-              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "right_shift"; lazy = true; } ];
-              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 1; }; } ];
-              conditions = [ { type = "variable_if"; name = "shift_lock"; value = 0; } ];
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
+              to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 0; }; } ];
+              conditions = [ { type = "variable_if"; name = "oneshot_shift"; value = 1; } ];
             }
+            {
+              type = "basic";
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
+              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 1; }; } ];
+              conditions = [
+                { type = "variable_if"; name = "shift_lock"; value = 0; }
+                { type = "variable_if"; name = "oneshot_shift"; value = 0; }
+              ];
+            }
+            {
+              type = "basic";
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
+              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
+              conditions = [
+                { type = "variable_if"; name = "shift_lock"; value = 1; }
+                { type = "variable_if"; name = "oneshot_shift"; value = 0; }
+              ];
+            }
+          ];
+        }
+        {
+          description = "right_shift tap arms one-shot shift for next key (clears shift_lock if on; taps off if already armed; hold still acts as shift)";
+          manipulators = [
             {
               type = "basic";
               from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
@@ -72,11 +96,31 @@ let
               to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
               conditions = [ { type = "variable_if"; name = "shift_lock"; value = 1; } ];
             }
+            {
+              type = "basic";
+              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "right_shift"; lazy = true; } ];
+              to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 0; }; } ];
+              conditions = [
+                { type = "variable_if"; name = "oneshot_shift"; value = 1; }
+                { type = "variable_if"; name = "shift_lock"; value = 0; }
+              ];
+            }
+            {
+              type = "basic";
+              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "right_shift"; lazy = true; } ];
+              to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 1; }; } ];
+              conditions = [
+                { type = "variable_if"; name = "oneshot_shift"; value = 0; }
+                { type = "variable_if"; name = "shift_lock"; value = 0; }
+              ];
+            }
           ];
         }
         {
-          description = "shift_lock: inject left_shift on typing keys while locked";
-          manipulators = map applyShift shiftableKeys;
+          description = "inject left_shift on typing keys while one-shot armed or shift_lock on";
+          manipulators = (map applyOneShot shiftableKeys) ++ (map applyLock shiftableKeys);
         }
       ];
     } ];

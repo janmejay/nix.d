@@ -90,6 +90,28 @@
             nixvim.homeModules.nixvim
         ] ++ addons;
       };
+
+      bvm-cfg = extra: nixpkgs.lib.nixosSystem {
+        system = "aarch64-linux";
+        specialArgs = { inherit inputs; };
+        modules = [
+          inputs.nixos-lima.nixosModules.lima
+          ./nixos/bvm/configuration.nix
+        ] ++ extra;
+      };
+
+      bvm-home-cfg = { hostUser, email }: home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages."aarch64-linux";
+        extraSpecialArgs = { inherit inputs email hostUser; user = "lima"; ai = "copilot"; };
+        modules = [
+          ({ ... }: {
+            home.username = "lima";
+            home.homeDirectory = "/home/lima";
+          })
+          ./home-manager/bvm.nix
+          nixvim.homeModules.nixvim
+        ];
+      };
     in {
 
       # build: 'nixos-rebuild --flake .#the-hostname'
@@ -100,15 +122,9 @@
 
         # Headless aarch64 NixOS build VM run via Lima (see lima/bvm.yaml,
         # bvm.readme.md). Rebuilt from inside the VM against this flake.lock.
-        bvm = nixpkgs.lib.nixosSystem {
-          system = "aarch64-linux";
-          specialArgs = { inherit inputs; };
-          modules = [
-            inputs.nixos-lima.nixosModules.lima
-            ./nixos/bvm/configuration.nix
-            ./nixos/zscalar.nix
-          ];
-        };
+        # bvmp = personal (no zscalar); bvmw = work/js1 (zscalar CA trust).
+        bvmp = bvm-cfg [ ];
+        bvmw = bvm-cfg [ ./nixos/zscalar.nix ];
       };
 
       darwinConfigurations = {
@@ -125,21 +141,11 @@
         "janmejay@jpl" = home-mgr-cfg-d { user = "janmejay"; email = "singh.janmejay@gmail.com"; ai = "copilot"; addons = []; };
         "janmejay@js1" = home-mgr-cfg-d { user = "janmejay.singh"; email = "janmejay.singh@sentinelone.com"; ai = "copilot"; addons = [./home-manager/addons/zscalar.nix]; };
 
-        # Lima build VM: guest user is `lima` with home /home/lima.guest (fixed by
-        # the nixos-lima image). Reuses ./home-manager/local_linux.nix via bvm.nix.
-        # Verify home dir in the VM with `echo $HOME` and adjust if it differs.
-        "lima@bvm" = home-manager.lib.homeManagerConfiguration {
-          pkgs = nixpkgs.legacyPackages."aarch64-linux";
-          extraSpecialArgs = { inherit inputs; email = "janmejay.singh@sentinelone.com"; user = "lima"; ai = "copilot"; };
-          modules = [
-            ({ ... }: {
-              home.username = "lima";
-              home.homeDirectory = "/home/lima.guest";
-            })
-            ./home-manager/bvm.nix
-            nixvim.homeModules.nixvim
-          ];
-        };
+        # Lima build VM: guest user `lima`, home /home/lima (pinned in lima/bvm.yaml).
+        # Reuses ./home-manager/local_linux.nix via bvm.nix.
+        # lima@bvmp = personal email; lima@bvmw = work email (match the nixos variant).
+        "lima@bvmp" = bvm-home-cfg { hostUser = "janmejay"; email = "singh.janmejay@gmail.com"; };
+        "lima@bvmw" = bvm-home-cfg { hostUser = "janmejay.singh"; email = "janmejay.singh@sentinelone.com"; };
       };
 
       devShells = (import ./modules/shells.nix {nixpkgs = nixpkgs;}).devShells;
