@@ -6,6 +6,21 @@ in {
     eachSystem (system: 
      let
        p = nixpkgs.legacyPackages.${system};
+       scalyr = p.stdenv.mkDerivation {
+         pname = "scalyr-tool";
+         version = "master";
+         src = p.fetchurl {
+           url = "https://raw.githubusercontent.com/scalyr/scalyr-tool/master/scalyr";
+           sha256 = "1bqbkpy6a5lrw2yi4rd8k75760xj6kv0qjabwy26v9smj0sl1pk6";
+         };
+         dontUnpack = true;
+         nativeBuildInputs = [ p.makeWrapper ];
+         installPhase = ''
+           mkdir -p $out/libexec $out/bin
+           install -m644 $src $out/libexec/scalyr.py
+           makeWrapper ${p.python3}/bin/python3 $out/bin/scalyr --add-flags $out/libexec/scalyr.py
+         '';
+       };
        work_pkgs = with p; [
             awscli2
             azure-cli
@@ -151,10 +166,10 @@ in {
         s1 = p.mkShell {
           name = "s1";
           hardeningDisable = [ "all" ];
-          # curl https://raw.githubusercontent.com/scalyr/scalyr-tool/master/scalyr > ~/ob/tools/scalyr
           packages = work_pkgs ++ [
             p.postgresql
             p.kubelogin-oidc
+            scalyr
           ];
           shellHook = ''
             export KUBECONFIG=$HOME/.kube/eks-config
