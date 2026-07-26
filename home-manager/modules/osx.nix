@@ -55,19 +55,19 @@ let
           } ];
         }
         {
-          description = "left_shift tap toggles persistent shift_lock (clears pending one-shot if armed; hold still acts as shift)";
+          description = "right_shift tap toggles persistent shift_lock (clears pending one-shot if armed; hold still acts as shift)";
           manipulators = [
             {
               type = "basic";
-              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "left_shift"; lazy = true; } ];
+              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "right_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 0; }; } ];
               conditions = [ { type = "variable_if"; name = "oneshot_shift"; value = 1; } ];
             }
             {
               type = "basic";
-              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "left_shift"; lazy = true; } ];
+              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "right_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "shift_lock"; value = 1; }; } ];
               conditions = [
                 { type = "variable_if"; name = "shift_lock"; value = 0; }
@@ -76,8 +76,8 @@ let
             }
             {
               type = "basic";
-              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "left_shift"; lazy = true; } ];
+              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "right_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
               conditions = [
                 { type = "variable_if"; name = "shift_lock"; value = 1; }
@@ -87,19 +87,19 @@ let
           ];
         }
         {
-          description = "right_shift tap arms one-shot shift for next key (clears shift_lock if on; taps off if already armed; hold still acts as shift)";
+          description = "left_shift tap arms one-shot shift for next key (clears shift_lock if on; taps off if already armed; hold still acts as shift)";
           manipulators = [
             {
               type = "basic";
-              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "right_shift"; lazy = true; } ];
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
               conditions = [ { type = "variable_if"; name = "shift_lock"; value = 1; } ];
             }
             {
               type = "basic";
-              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "right_shift"; lazy = true; } ];
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 0; }; } ];
               conditions = [
                 { type = "variable_if"; name = "oneshot_shift"; value = 1; }
@@ -108,8 +108,8 @@ let
             }
             {
               type = "basic";
-              from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
-              to = [ { key_code = "right_shift"; lazy = true; } ];
+              from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
+              to = [ { key_code = "left_shift"; lazy = true; } ];
               to_if_alone = [ { set_variable = { name = "oneshot_shift"; value = 1; }; } ];
               conditions = [
                 { type = "variable_if"; name = "oneshot_shift"; value = 0; }

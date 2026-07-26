@@ -59,33 +59,7 @@ in{
           foldlevelstart = 99;
           undofile = true;
         };
-        extraPlugins = with pkgs.vimPlugins; [
-          fine-cmdline-nvim
-        ];
         extraConfigLua = ''
-          require('fine-cmdline').setup({
-            cmdline = {
-              enable_keymaps = false,
-            },
-            popup = {
-              position = {
-                row = '90%',
-                col = '50%',
-              },
-            },
-            hooks = {
-              set_keymaps = function(imap, feedkeys)
-                local fn = require('fine-cmdline').fn
-                imap('<C-p>', fn.up_search_history)
-                imap('<C-n>', fn.down_search_history)
-                imap('<Up>', fn.up_search_history)
-                imap('<Down>', fn.down_search_history)
-                imap('<Esc>', fn.close)
-                imap('<Tab>', fn.complete_or_next_item)
-                imap('<S-Tab>', fn.previous_item)
-              end,
-            },
-          })
           vim.cmd('source ~/.config/sym_xlate.nvim.lua')
 
           do
@@ -98,24 +72,6 @@ in{
           end
         '';
         keymaps = [
-          {
-            mode = "n";
-            key = ":";
-            action = "<cmd>lua require('fine-cmdline').open()<CR>";
-            options = {
-              noremap = true;
-              silent = true;
-            };
-          }
-          {
-            mode = "v";
-            key = ":";
-            action = "<cmd>lua require('fine-cmdline').open({ default_value = \"'<,'>\" })<CR>";
-            options = {
-              noremap = true;
-              silent = true;
-            };
-          }
           {
             mode = "n";
             key = "yp";
@@ -286,7 +242,25 @@ in{
             };
           };
           nvim-surround.enable = true;
+          noice = {
+            enable = true;
+            settings = {
+              messages.enabled = false;
+              notify.enabled = false;
+              lsp = {
+                progress.enabled = false;
+                hover.enabled = false;
+                signature.enabled = false;
+                message.enabled = false;
+              };
+              views.cmdline_popup.position = {
+                row = "90%";
+                col = "50%";
+              };
+            };
+          };
           fastaction.enable = true;
+          indent-blankline.enable = true;
           treesitter = {
             enable = true;
             grammarPackages = pkgs.vimPlugins.nvim-treesitter.allGrammars;
@@ -387,7 +361,13 @@ in{
           neo-tree.enable = true;
           web-devicons.enable = true;
           marks.enable = true;
-          nvim-bqf.enable = true;
+          nvim-bqf = {
+            enable = true;
+            settings.preview = {
+              win_height = 25;
+              win_vheight = 25;
+            };
+          };
           telescope = {
             enable = true;
             extensions = {
