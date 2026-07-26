@@ -21,16 +21,16 @@ sudo systemsetup -setremotelogin on                # for `git clone host:...` fr
 cat ~/.ssh/id_ed25519.pub >> ~/.ssh/authorized_keys
 ```
 
-## Initial setup
+## Initial setup (from <repo>)
 ```bash
 limactl start ./lima/bvm.yaml --name bvm           # downloads image, boots ssh-ready
 limactl shell bvm
 # bvmw only: disable Zscaler on the Mac for this first rebuild, then re-enable after.
-sudo nixos-rebuild boot --flake <repo>#bvmp        # bvmp personal / bvmw work
+sudo nixos-rebuild boot --flake .#bvmp        # bvmp personal / bvmw work (bvmw: add --impure)
 sudo reboot
 # reconnect — home-manager CLI is now on PATH:
 limactl shell bvm
-home-manager switch --flake <repo>#lima@bvmp        # bvmp personal / bvmw work
+home-manager switch --flake .#lima@bvmp        # bvmp personal / bvmw work
 ```
 
 ## Usage
@@ -43,8 +43,8 @@ git clone host:ob/manager                          # in VM: clone work repos to 
 ## Upgrade / GC (in VM)
 ```bash
 # Mac: nix flake update && commit
-sudo nixos-rebuild boot --flake <repo>#bvmp && sudo reboot   # bvmp personal / bvmw work
-home-manager switch --flake <repo>#lima@bvmp        # bvmp personal / bvmw work
+sudo nixos-rebuild boot --flake .#bvmp && sudo reboot   # bvmp personal / bvmw work (bvmw: add --impure)
+home-manager switch --flake .#lima@bvmp        # bvmp personal / bvmw work
 ./trim-generations.sh 2 0 home-manager && sudo nix-collect-garbage -d
 ```
 
@@ -56,6 +56,9 @@ limactl stop bvm && limactl delete bvm
 ## Notes
 - Use `boot`+reboot, not `switch` (live switch fails to stop the busy host-home mount).
 - Zscaler is trusted via `~/.zscaler-ca.pem` (`nixos/zscalar.nix`); refresh it when the CA rotates.
+- `bvmw` rebuilds need `--impure`: `nixos/zscalar.nix` asserts the CA bundle exists at eval
+  time, and pure flake eval can't see that host path (reports it missing, no error — so a
+  forgotten `--impure` looks like a missing cert). `bvmp` (no zscalar) stays pure.
 - Can't disable Zscaler for the first rebuild? Pre-trust the daemon once:
   `printf '[Service]\nEnvironment="NIX_SSL_CERT_FILE=/Users/janmejay.singh/.zscaler-ca.pem"\n' | sudo tee /etc/systemd/system/nix-daemon.service.d/zscaler.conf && sudo systemctl daemon-reload && sudo systemctl restart nix-daemon`
 - Resources (`lima/bvm.yaml`): cpus 12 / 24GiB / 250GiB — sized for `~/ob/vector`.

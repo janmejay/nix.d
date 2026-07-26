@@ -21,6 +21,17 @@ in {
            makeWrapper ${p.python3}/bin/python3 $out/bin/scalyr --add-flags $out/libexec/scalyr.py
          '';
        };
+       waiting = p.python313Packages.buildPythonPackage rec {
+         pname = "waiting";
+         version = "1.4.1";
+         src = p.python313Packages.fetchPypi {
+           inherit pname version;
+           hash = "sha256-tkHvOiOC4QHTxOZklNpvxSuCwyXdBK40HgUbDuxvMM0=";
+         };
+         pyproject = true;
+         build-system = [ p.python313Packages.setuptools ];
+         doCheck = false;
+       };
        work_pkgs = with p; [
             awscli2
             azure-cli
@@ -53,11 +64,17 @@ in {
             colima
             docker
             docker-compose
-            python312Packages.virtualenv
             pstree
             jwt-cli
-            python313Packages.tox
-          ];
+          ] ++ (with p.python313Packages; [
+            tox
+            boto3
+            pip
+            virtualenv
+            yamlcore
+            kubernetes
+            pysocks
+          ]) ++ [ waiting ];
      in {
         amm = p.mkShell {
           packages = [ p.ammonite_2_13 ];
