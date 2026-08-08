@@ -16,6 +16,9 @@ let
       "semicolon" "quote"
       "comma" "period" "slash" ];
 
+  lockOnMsg = { set_notification_message = { id = "shift_lock"; text = "⇧ LOCK"; }; };
+  lockOffMsg = { set_notification_message = { id = "shift_lock"; text = ""; }; };
+
   applyOneShot = key: {
     type = "basic";
     from = { key_code = key; };
@@ -43,7 +46,7 @@ let
             type = "basic";
             from = { key_code = "left_command"; modifiers = { optional = [ "any" ]; }; };
             to = [ { key_code = "left_command"; } ];
-            to_if_alone = [ { key_code = "escape"; } ];
+            to_if_alone = [ { key_code = "escape"; } { set_variable = { name = "shift_lock"; value = 0; }; } lockOffMsg ];
           } ];
         }
         {
@@ -52,6 +55,17 @@ let
             type = "basic";
             from = { key_code = "caps_lock"; modifiers = { optional = [ "any" ]; }; };
             to = [ { key_code = "left_control"; } ];
+          } ];
+        }
+        {
+          description = "command+control+g clears shift_lock (passes through; no-op when already off)";
+          manipulators = [ {
+            type = "basic";
+            from = { key_code = "g"; modifiers = { mandatory = [ "command" "control" ]; optional = [ "any" ]; }; };
+            to = [ { key_code = "g"; modifiers = [ "left_command" "left_control" ]; }
+                   { set_variable = { name = "shift_lock"; value = 0; }; }
+                   lockOffMsg ];
+            conditions = [ { type = "variable_if"; name = "shift_lock"; value = 1; } ];
           } ];
         }
         {
@@ -68,7 +82,7 @@ let
               type = "basic";
               from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
               to = [ { key_code = "right_shift"; lazy = true; } ];
-              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 1; }; } ];
+              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 1; }; } lockOnMsg ];
               conditions = [
                 { type = "variable_if"; name = "shift_lock"; value = 0; }
                 { type = "variable_if"; name = "oneshot_shift"; value = 0; }
@@ -78,7 +92,7 @@ let
               type = "basic";
               from = { key_code = "right_shift"; modifiers = { optional = [ "any" ]; }; };
               to = [ { key_code = "right_shift"; lazy = true; } ];
-              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
+              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } lockOffMsg ];
               conditions = [
                 { type = "variable_if"; name = "shift_lock"; value = 1; }
                 { type = "variable_if"; name = "oneshot_shift"; value = 0; }
@@ -93,7 +107,7 @@ let
               type = "basic";
               from = { key_code = "left_shift"; modifiers = { optional = [ "any" ]; }; };
               to = [ { key_code = "left_shift"; lazy = true; } ];
-              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } ];
+              to_if_alone = [ { set_variable = { name = "shift_lock"; value = 0; }; } lockOffMsg ];
               conditions = [ { type = "variable_if"; name = "shift_lock"; value = 1; } ];
             }
             {
