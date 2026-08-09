@@ -108,8 +108,9 @@ in
   };
 
   home.packages = with pkgs; [
-    sops 
+    sops
     rustup
+    elan
     eza
     bat
     fzf

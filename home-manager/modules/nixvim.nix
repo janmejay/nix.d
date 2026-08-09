@@ -94,6 +94,10 @@ in{
             action = "<cmd>Neotree filesystem reveal focus<CR>";
           }
           {
+            key = "<leader>q";
+            action = "<cmd>qa<CR>";
+          }
+          {
             key = "<leader>tt";
             action = "<cmd>Neotree toggle<CR>";
           }
@@ -194,6 +198,8 @@ in{
             '';
           }
         ];
+        dependencies.lean.enable = false; # Lean toolchain comes from elan, not nixpkgs lean4
+
         colorschemes.catppuccin = {
           enable = true;
           settings = {
@@ -425,6 +431,15 @@ in{
             enable = true;
             modules.icons = { };
             mockDevIcons = true;
+          };
+          lean = {
+            enable = true;
+            settings = {
+              lsp.enable = true;
+              mappings = true;
+              abbreviations.enable = true;
+              infoview.autoopen = true;
+            };
           };
         } // (if ai == "copilot" then {
           copilot-lua = { enable = true; settings.panel.enabled = false; };
