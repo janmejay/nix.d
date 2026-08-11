@@ -133,6 +133,15 @@ let
           ];
         }
         {
+          description = "left_option tap arms one-shot option for next key (hold still acts as option)";
+          manipulators = [ {
+            type = "basic";
+            from = { key_code = "left_option"; modifiers = { optional = [ "any" ]; }; };
+            to = [ { key_code = "left_option"; lazy = true; } ];
+            to_if_alone = [ { sticky_modifier = { left_option = "on"; }; } ];
+          } ];
+        }
+        {
           description = "inject left_shift on typing keys while one-shot armed or shift_lock on";
           manipulators = (map applyOneShot shiftableKeys) ++ (map applyLock shiftableKeys);
         }
