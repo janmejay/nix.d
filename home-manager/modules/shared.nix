@@ -53,8 +53,19 @@ in
       };
       core = {
         editor = "nvim";
-        pager = "less -F -x4";
+        pager = "delta";
       };
+      interactive.diffFilter = "delta --color-only";
+      delta = {
+        navigate = true;
+        line-numbers = true;
+        syntax-theme = "ansi";
+        minus-style = "syntax #3a1e1e";
+        minus-emph-style = "syntax #6b2b2b";
+        plus-style = "syntax #1e3a1e";
+        plus-emph-style = "syntax #2b6b2b";
+      };
+      merge.conflictStyle = "zdiff3";
       push.default = "current";
       pull.rebase = false;
       branch.autosetupmerge = "true";
@@ -118,6 +129,7 @@ in
     ripgrep
     tree
     fd
+    delta
     yazi
     watch
     nodejs
