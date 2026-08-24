@@ -38,7 +38,7 @@ on-focused-monitor-changed = ['move-mouse monitor-lazy-center']
 automatically-unhide-macos-hidden-apps = false
 
 [exec]
-    env-vars.PATH = "/Users/janmejay.singh/.dev_utils:/Users/janmejay.singh/.nix-profile/bin:/run/current-system/sw/bin:/usr/bin:/bin"
+    env-vars.PATH = "@HOME@/.dev_utils:@HOME@/.nix-profile/bin:/run/current-system/sw/bin:/usr/bin:/bin"
 
 # Possible values: (qwerty|dvorak|colemak)
 # See https://nikitabobko.github.io/AeroSpace/guide#key-mapping

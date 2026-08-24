@@ -41,6 +41,14 @@ let
       virtual_hid_keyboard = { country_code = 0; keyboard_type_v2 = "ansi"; indicate_sticky_modifier_keys_state = false; };
       complex_modifications.rules = [
         {
+          description = "control+option+command+k: panic-kill warpd and chime (works even while warpd grabs the keyboard)";
+          manipulators = [ {
+            type = "basic";
+            from = { key_code = "k"; modifiers = { mandatory = [ "left_control" "left_option" "left_command" ]; optional = [ "any" ]; }; };
+            to = [ { shell_command = "/usr/bin/killall warpd; /usr/bin/afplay /System/Library/Sounds/Submarine.aiff"; } ];
+          } ];
+        }
+        {
           description = "left_command: Escape on tap, Command on hold";
           manipulators = [ {
             type = "basic";
@@ -150,6 +158,11 @@ let
   };
 
   karabinerJson = pkgs.writeText "karabiner.json" (builtins.toJSON karabinerConfig);
+
+  aerospaceToml = pkgs.runCommandLocal "aerospace.toml" {} ''
+    substitute ${../../dots/aerospace.toml} $out \
+      --replace-fail '@HOME@' '${config.home.homeDirectory}'
+  '';
 in
 {
   options.osx = {
@@ -164,7 +177,7 @@ in
 
     home.file = {
       ".config/karabiner/karabiner.json".source = karabinerJson;
-      ".config/aerospace/aerospace.toml".source = ../../dots/aerospace.toml;
+      ".config/aerospace/aerospace.toml".source = aerospaceToml;
       ".config/alacritty/alacritty.toml".source = ../../dots/alacritty/alacritty.toml;
       ".config/ghostty/config".source = ../../dots/ghostty/config;
     };
