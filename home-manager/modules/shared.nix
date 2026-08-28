@@ -133,6 +133,7 @@ in
     claude-code
     lima
     gh
+    lnav
   ];
 
   programs.zsh = {
