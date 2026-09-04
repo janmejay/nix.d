@@ -33,6 +33,7 @@ in {
          doCheck = false;
        };
        work_pkgs = with p; [
+            graphviz
             awscli2
             azure-cli
             kubectl
